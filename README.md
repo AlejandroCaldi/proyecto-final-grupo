@@ -10,7 +10,7 @@ Para instalar:
 npm install 
 npm install jquery
 npm install parcel
-npm install bootstrap@3.4
+npm install bootstrap@3.4.1
 ```
 
 
