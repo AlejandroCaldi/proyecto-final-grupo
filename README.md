@@ -24,3 +24,8 @@ npm server run
 En el back:
 
 instalar un nuevo proyecto en maven en otra carpeta fuera del proyecto y pegarlo todo dentro de la carpeta back
+
+
+servidor falso json:
+
+https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes

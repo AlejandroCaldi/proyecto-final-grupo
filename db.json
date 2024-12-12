@@ -1,0 +1,24 @@
+{
+  "solicitudes": [
+    {
+      "id": 1,
+      "nombre": "Pepe",
+      "apellido": "Pérez"
+    },
+    {
+      "id": 2,
+      "nombre": "Rodolfo",
+      "apellido": "García"
+    },
+    {
+      "id": 3,
+      "nombre": "María",
+      "apellido": "Fernández"
+    },
+    {
+      "id": 4,
+      "nombre": "Lucía",
+      "apellido": "Martínez"
+    }
+  ]
+}
