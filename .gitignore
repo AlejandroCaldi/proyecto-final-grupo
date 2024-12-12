@@ -26,7 +26,7 @@ replay_pid*
 
 # Por temas de front
 
-.node_modules/
-node_modules/
-dist/
-.dist/
+front/.node_modules/
+front/node_modules/
+front/dist/
+front/.dist/
