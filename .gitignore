@@ -23,8 +23,10 @@
 hs_err_pid*
 replay_pid*
 
+
 # Por temas de front
 
 .node_modules/
+node_nodules/
 dist/
 .dist/
