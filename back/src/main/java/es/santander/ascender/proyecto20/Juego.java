@@ -33,6 +33,10 @@ public class Juego {
 
     }
  
+    /**
+     * @param numero
+     * @return
+     */
     private boolean chequearLimite(int numero) {
 
         if (numero > MAXIMO || numero < MINIMO) {
