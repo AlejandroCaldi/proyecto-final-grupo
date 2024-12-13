@@ -35,4 +35,4 @@ build/
 target/
 .parcel/
 
-log.txt
+/src/log.txt
