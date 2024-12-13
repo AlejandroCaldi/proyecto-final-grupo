@@ -89,7 +89,7 @@ public class Juego {
      */
     public String cancelarPartida(String Usuario) {
 
-        return "Partida terminada: El número a adivinar era: " + numTarget;
+            return "Partida terminada: El número a adivinar era: " + numTarget;
 
     }
 
