@@ -46,7 +46,7 @@
     --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-    --bs-body-font-family: DM Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    --bs-body-font-family: 'Roboto', sans-serif;
     --bs-body-font-size: 1.5em;
     --bs-body-font-weight: 400;
     --bs-body-line-height: 1.5;
@@ -68,6 +68,37 @@
     --bs-highlight-bg: #fff3cd;
   }
   
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400; /* Regular */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto-Bold.ttf') format('truetype');
+  font-weight: 700; /* Bold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto-Italic.ttf') format('truetype');
+  font-weight: 400; /* Regular */
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto-Black.ttf') format('truetype');
+  font-weight: 900; /* Black */
+  font-style: normal;
+}
+
+
+
   *,
   *::before,
   *::after {
@@ -76,34 +107,100 @@
 
  
   body {
-    margin: 5%;
-    font-family: var(--bs-body-font-family);
+    margin: 6%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400; /* Regular */
+    font-style: normal;  
+
     font-size: var(--bs-body-font-size);
-    font-weight: var(--bs-body-font-weight);
+
     line-height: var(--bs-body-line-height);
     color: var(--bs-body-color);
     text-align: var(--bs-body-text-align);
     background-color: var(--bs-gray-600);
 
+
  /* Imagen de fondo responsiva */
-    background-image: url('../assets/robotFondo_ia\ .png');
+    background-image: url('../assets/robotFondoIA\.png');
+    
     background-size: cover; /* Asegura que la imagen cubra toda el área */
     background-position: center; /* Centra la imagen de fondo */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     background-attachment: fixed; /* Fija la imagen de fondo mientras se desplaza el contenido (opcional) */
   }
-  #zonaJuego{
-    max-width: 40%;
-    
-    background-color: rgba(238, 103, 14, 0.9); 
+  #zonaJuego {
+    width: 80%; /* Asegura que ocupe el 80% del ancho en pantallas pequeñas */
+    max-width: 600px; /* Establece un máximo de ancho para pantallas grandes */
+    background-color: rgba(238, 103, 14, 0.8); 
     color: rgb(2, 2, 2); /* Color de texto */
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px; /* Opcional: bordes redondeados */
-  }
-  input{
-    color: white;
-    background-color: #000000;
-  }
+    margin: 0 auto; /* Centra el bloque */
+    font-family: 'Roboto', sans-serif;
+}
 
+/* Ajustes para pantallas medianas */
+@media (max-width: 768px) {
+    #zonaJuego {
+        width: 90%; /* Ocupa el 90% del ancho en pantallas medianas */
+    }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 480px) {
+    #zonaJuego {
+        width: 95%; /* Ocupa casi todo el ancho en pantallas pequeñas */
+    }
+}
+h1 {
+  font-size: 6vw; /* Esto hará que el tamaño del texto sea proporcional al ancho de la pantalla */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700; /* Bold */
+}
+
+@media (max-width: 768px) {
+  h1 {
+      font-size: 5vw; /* Ajuste para pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+      font-size: 4vw; /* Ajuste para pantallas muy pequeñas */
+  }
+}
+
+input, label {
+  color: white;
+  background-color: #000000;
+  font-family: 'Roboto', sans-serif;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1em; /* Tamaño de fuente predeterminado */
+}
+
+/* Ajustes para pantallas medianas (max-width: 768px) */
+@media (max-width: 768px) {
+  input, label {
+    font-size: 0.9em; /* Reduce el tamaño de la fuente en pantallas medianas */
+    padding: 8px; /* Reduce el padding en pantallas medianas */
+  }
+}
+
+/* Ajustes para pantallas pequeñas (max-width: 480px) */
+@media (max-width: 480px) {
+  input, label {
+    font-size: 0.8em; /* Reduce el tamaño de la fuente aún más en pantallas pequeñas */
+    padding: 6px; /* Reduce aún más el padding */
+  }
+}
+
+/* Ajustes para pantallas extra pequeñas (max-width: 360px) */
+@media (max-width: 360px) {
+  input, label {
+    font-size: 0.75em; /* Ajuste de tamaño de fuente aún más pequeño */
+    padding: 5px; /* Ajuste del padding para pantallas muy pequeñas */
+  }
+}
 
   
