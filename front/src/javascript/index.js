@@ -55,7 +55,7 @@ $(document).ready(function() {
             //    adivinar: adivinaNum;
             }),
             success: function(data) {
-                $("#respuestaServidor").text("OK. Nuevo registro."); 
+                $("#respuestaServidor").text("Partida creada. POST."); 
              //   listar();
                 console.log(data);
             },
