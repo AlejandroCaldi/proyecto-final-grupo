@@ -1,8 +1,7 @@
 # proyecto-final-grupo
 Trabajo en Grupo de cierre 1er parte Ascender.
 
-
-en la carpeta front
+EN LA CARPETA FRONT:
 
 Para instalar:
 
@@ -13,15 +12,14 @@ npm install parcel
 npm install bootstrap@3.4.1
 ```
 
-
-para correr:
+para levantar servidor:
 
 ```sh
-npm server run
+npm run server 
 ```
 
 
-En el back:
+EN EL BACK:
 
 instalar un nuevo proyecto en maven en otra carpeta fuera del proyecto y pegarlo todo dentro de la carpeta back
 
@@ -31,7 +29,7 @@ servidor falso json:
 https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes
 
 
-Marco genral par el lado de Back:
+MARCO GENERAL PARA EL BACK:
 
 
 ```sh
