@@ -97,8 +97,6 @@
   font-style: normal;
 }
 
-
-
   *,
   *::before,
   *::after {
@@ -128,15 +126,25 @@
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     background-attachment: fixed; /* Fija la imagen de fondo mientras se desplaza el contenido (opcional) */
   }
-  #zonaJuego {
+  /* Animación de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+#zonaJuego {
     width: 80%; /* Asegura que ocupe el 80% del ancho en pantallas pequeñas */
     max-width: 600px; /* Establece un máximo de ancho para pantallas grandes */
     background-color: rgba(238, 103, 14, 0.8); 
     color: rgb(2, 2, 2); /* Color de texto */
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px; /* Opcional: bordes redondeados */
     margin: 0 auto; /* Centra el bloque */
     font-family: 'Roboto', sans-serif;
+    animation: fadeIn 0.8s ease-out; /* Aparece suavemente */
 }
 
 /* Ajustes para pantallas medianas */
@@ -159,24 +167,41 @@ h1 {
 }
 
 @media (max-width: 768px) {
-  h1 {
-      font-size: 5vw; /* Ajuste para pantallas más pequeñas */
+h1 {
+      font-size: 6vw; /* Ajuste para pantallas más pequeñas */
   }
 }
 
 @media (max-width: 480px) {
   h1 {
-      font-size: 4vw; /* Ajuste para pantallas muy pequeñas */
+      font-size: 5vw; /* Ajuste para pantallas muy pequeñas */
+  }
+}
+h3 {
+  font-size: 2vw; /* Esto hará que el tamaño del texto sea proporcional al ancho de la pantalla */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700; /* Bold */
+}
+@media (max-width: 768px) {
+h3 {
+      font-size: 3vw; /* Ajuste para pantallas más pequeñas */
   }
 }
 
+@media (max-width: 480px) {
+h3 {
+      font-size: 3vw; /* Ajuste para pantallas muy pequeñas */
+  }
+}
 input, label {
   color: white;
   background-color: #000000;
   font-family: 'Roboto', sans-serif;
   padding: 10px;
   border-radius: 5px;
+  
   font-size: 1em; /* Tamaño de fuente predeterminado */
+  margin-bottom: 15px;
 }
 
 /* Ajustes para pantallas medianas (max-width: 768px) */
@@ -200,7 +225,127 @@ input, label {
   input, label {
     font-size: 0.75em; /* Ajuste de tamaño de fuente aún más pequeño */
     padding: 5px; /* Ajuste del padding para pantallas muy pequeñas */
+    
   }
 }
 
+
+#respuestaServidor {
+  font-family: 'Roboto', sans-serif; /* Fuente atractiva */
+  font-weight: 400; /* Regular */
+  font-size: 1em; /* Tamaño de texto adecuado */
+  color: #333; /* Color de texto oscuro */
+  background-color: #f8f9fa; /* Fondo claro para resaltar el mensaje */
+  padding: 10px; /* Espaciado alrededor del texto */
+  border-radius: 10px; /* Bordes redondeados */
+  border: 1px solid #ccc; /* Borde sutil */
+  max-width: 40%; /* Asegura que el mensaje no ocupe todo el ancho */
+  margin: 10px auto; /* Centra el bloque y da espacio alrededor */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  text-align: left; /* Alineación de texto a la izquierda */
+  line-height: 1.6; /* Espaciado entre líneas */
+  transition: all 0.3s ease; /* Suaviza los cambios de estilo */
+}
+
+
+/* Estilo para el contenedor del label y el input */
+#nombreJugador-container {
+  display: flex;
+  align-items: center; /* Centra verticalmente el label y el input */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  margin-bottom: 15px; /* Espacio entre campos */
+  border-radius: 50px; /* Bordes redondeados para dar un aspecto de botón */
+  overflow: hidden; /* Oculta las partes fuera de los bordes redondeados */
+  flex-wrap: wrap; /* Permite que los elementos se ajusten si el espacio es limitado */
+}
+
+/* Estilo para el label (como parte del botón) */
+#nombreJugadorLabel {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1.1em;
+  color: white;
+  background: linear-gradient(45deg, #007bff, #6610f2); /* Degradado de color */
+  padding: 12px 20px;
+  text-align: center;
+  cursor: pointer;
+  width: 50%; /* Ocupa la mitad del ancho */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover para el label */
+#nombreJugadorLabel:hover {
+  background: linear-gradient(45deg, #0056b3, #4e0ec6); /* Cambio en el degradado */
+  transform: translateY(-2px); /* Eleva ligeramente el label */
+}
+
+/* Estilo para el input (como parte del botón) */
+#nombreJugador {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1em;
+  padding: 12px 20px;
+  border: none;
+  outline: none;
+  background-color: #000000; /* Fondo claro */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna para dar relieve */
+  width: 50%; /* Ocupa la mitad del ancho */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Suavizar el borde de focus del input */
+#nombreJugador:focus {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 5px rgba(13, 202, 240, 0.7); /* Sombra interna y externa */
+  transform: translateY(-2px); /* Eleva ligeramente el input cuando tiene focus */
+}
+
+/* Estilo cuando el input está deshabilitado o en estado de error */
+#nombreJugador:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+#nombreJugador.error {
+  background-color: #f8d7da; /* Fondo rojo para indicar error */
+  border: 1px solid #dc3545; /* Borde rojo */
+}
+
+/* Media Queries para hacer responsive */
+
+/* Ajustes para pantallas medianas (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Ajusta el tamaño del label y el input */
+  #nombreJugadorLabel, #nombreJugador {
+    font-size: 1em; /* Reduce el tamaño de la fuente */
+    padding: 10px 15px; /* Reduce el padding */
+    width: 100%; /* Hace que ambos elementos ocupen el 100% del ancho */
+  }
+
+  /* Aplica una separación entre el label y el input */
+  #nombreJugador-container {
+    flex-direction: column; /* Los coloca uno debajo del otro */
+  }
+}
+
+/* Ajustes para pantallas pequeñas (max-width: 480px) */
+@media (max-width: 480px) {
+  /* Ajusta aún más el tamaño del label y el input */
+  #nombreJugadorLabel, #nombreJugador {
+    font-size: 0.9em; /* Reduce el tamaño de la fuente */
+    padding: 8px 12px; /* Reduce aún más el padding */
+  }
   
+  /* Mantén el contenedor en columna */
+  #nombreJugador-container {
+    flex-direction: column; /* Los coloca uno debajo del otro */
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas (max-width: 360px) */
+@media (max-width: 360px) {
+  /* Ajusta aún más el tamaño del label y el input */
+  #nombreJugadorLabel, #nombreJugador {
+    font-size: 0.85em; /* Reduce aún más el tamaño de la fuente */
+    padding: 6px 10px; /* Reduce el padding */
+  }
+}

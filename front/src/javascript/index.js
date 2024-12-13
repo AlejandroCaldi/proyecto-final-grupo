@@ -30,8 +30,8 @@ $(document).ready(function() {
 
     // Crear nueva partida ************************************************************************
     $("#btnNuevaPartida").on("click", function() {
-
-    var nombreNuevo = $("#nombreJugador").val();
+        $("#numero").val("");
+        var nombreNuevo = $("#nombreJugador").val();
     //     var adivinarNuevo = 77;   // generar aleatoriamente en cada nueva partida
          if (nombreNuevo === "") { // Ni vacíos ni de tipo distinto a cadena
             $("#respuestaServidor").text("Introduce un nombre si quieres retarme.");
