@@ -20,7 +20,7 @@ public class JuegoTest {
     void testCancelarPartida() {
         int sesion = 4;
         String user = jueguito.getUsuario();
-        String respuesta = jueguito.cancelarPartida(user, sesion);
+        String respuesta = jueguito.cancelarPartida(user);
 
         assertEquals(respuesta,"Partida terminada: El número a adivinar era: " + jueguito.getNumTarget());
 
@@ -36,9 +36,8 @@ public class JuegoTest {
 
     @Test
     void testInicializarJuego() {
-        int[] parametros = jueguito.inicializarJuego();
-        assertEquals(0, parametros[0]);
-        assertEquals(1, parametros[1]);
+        int sesion = jueguito.inicializarJuego();
+        assertEquals(1, sesion);
     }
 
     @Test
@@ -46,11 +45,11 @@ public class JuegoTest {
         int numeroAdivinar = jueguito.getNumTarget();
         System.out.println(numeroAdivinar);
 
-        int[] respuesta = jueguito.jugarIntento("Alejandro", numeroAdivinar, 1);
+        int[] respuesta = jueguito.jugarIntento(numeroAdivinar, 1);
 
         assertTrue(respuesta[0]==0);
         assertTrue(respuesta[1]==1);
-        assertTrue(respuesta[2]==1);
+
 
     }
 

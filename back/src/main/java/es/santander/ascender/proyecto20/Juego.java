@@ -11,11 +11,11 @@ public class Juego {
 
     private final int MINIMO = 0;
     private final int MAXIMO = 100;
-    private int numTarget = (int) (Math.random() * 100)  + 1;
+    private final int INTENTOS_MAXIMO = 10;
+    private int numTarget = (int) (Math.random() * 100) + 1;
     private int intentos;
     private int sesion = 1;
     public String usuario = "";
-
 
     private static final String ARCHIVO_DE_REGISTRO = "log.txt";
 
@@ -28,74 +28,74 @@ public class Juego {
      * @param usuarioJugador
      * @return
      */
-    public int[] inicializarJuego() {
+    public int inicializarJuego() {
 
-        int retorno[] = new int[2];
         this.intentos = 0;
-        retorno[0] = this.intentos;
         this.sesion = 1;
-        retorno[1] = this.sesion;
-        return retorno;
+        return this.sesion;
 
     }
 
-
     /**
-     * @param intento el nmumero que arriesga el jugador. 
-     * @param sesion la sesión para devolver por api rest, no tiene uso en consola: pasar cualquier valor. 
+     * @param intento el nmumero que arriesga el jugador.
+     * @param sesion  la sesión para devolver por api rest, no tiene uso en consola:
+     *                pasar cualquier valor.
      * @return un int[] array con el primer valor para saber si acertó, el id
      * @throws Exception si el número está fuera de rango.
      */
-     public int[] jugarIntento(String usuario, int intento, int sesion) throws MiExcepcion {
+    public int[] jugarIntento(int numeroCliente, int sesion) throws MiExcepcion {
 
-        boolean chequeoNumero = chequearLimite(intento);
-        int[] retorno = new int [3];   
+        boolean chequeoNumero = chequearLimite(numeroCliente);
+        int[] retorno = new int[2];
 
         if (chequeoNumero) {
 
-            intentos++;
-            
-            if (intento == numTarget) {
+            if (this.intentos < INTENTOS_MAXIMO) {
+                this. intentos++;
 
-                String mensaje = "";
+                if (numeroCliente == numTarget) {
 
-                mensaje = usuario + "," + sesion + "," + intento;
-                escribirRegistro(mensaje);
+                    String mensaje = "";
 
-                retorno[0]= 0;
-                retorno[1]= intentos;
-                retorno[2]= sesion; 
+                    mensaje = usuario + "," + sesion + "," + numeroCliente;
+                    escribirRegistro(mensaje);
+
+                    retorno[0] = 0;
+                    retorno[1] = intentos;
+                    return retorno;
+                }
+                if (numeroCliente > numTarget) {
+                    retorno[0] = -1;
+                    retorno[1] = intentos;
+                    return retorno;
+                }
+                retorno[0] = 1;
+                retorno[1] = intentos;
                 return retorno;
+
+            } else {
+
+                throw new MiExcepcion("No quedan mas intentos");
             }
-            if (intento > numTarget) {
-                retorno[0]= -1;
-                retorno[1]= intentos;
-                retorno[2]= sesion; 
-                return retorno;
-            } 
-            retorno[0]= 1;
-            retorno[1]= intentos; 
-            retorno[2]= sesion;
-            return retorno;
-        } else  {
+        } else {
 
             throw new MiExcepcion("El número está fuera de rango");
         }
 
     }
 
-        /**
-         * @return String mostrando que terminó el juegoy cuál era el valor a adivinar.
-         */
-        public String cancelarPartida(String Usuario, int sesion) {
-        
-            return "Partida terminada: El número a adivinar era: " + numTarget;
-            
-        }
+    /**
+     * @return String mostrando que terminó el juegoy cuál era el valor a adivinar.
+     */
+    public String cancelarPartida(String Usuario) {
+
+        return "Partida terminada: El número a adivinar era: " + numTarget;
+
+    }
 
     /**
      * @param numero el valor pasado por el jugador.
-     * @return True si el numero está dentro de limite. False si no. 
+     * @return True si el numero está dentro de limite. False si no.
      */
     private boolean chequearLimite(int numero) {
 
@@ -118,7 +118,7 @@ public class Juego {
     public static void leerRegistro(String filter) {
         try (Stream<String> lines = Files.lines(Paths.get(ARCHIVO_DE_REGISTRO))) {
             lines.filter(line -> line.contains(filter))
-                 .forEach(System.out::println);
+                    .forEach(System.out::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
