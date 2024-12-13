@@ -5,34 +5,36 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.stream.Stream;
 
 public class Juego {
 
     private final int MINIMO = 0;
     private final int MAXIMO = 100;
-    private int numTarget = (int) Math.random() * 100;
+    private int numTarget = (int) (Math.random() * 100)  + 1;
     private int intentos;
     private int sesion = 1;
-    private String usuario = "";
+    public String usuario = "";
+
 
     private static final String ARCHIVO_DE_REGISTRO = "log.txt";
 
     public Juego(String usuarioJugador) throws Exception {
 
+        this.usuario = usuarioJugador;
     }
 
     /**
      * @param usuarioJugador
      * @return
      */
-    public int[] inicializarJuego(String usuarioJugador) {
+    public int[] inicializarJuego() {
 
         int retorno[] = new int[2];
         this.intentos = 0;
         retorno[0] = this.intentos;
         this.sesion = 1;
         retorno[1] = this.sesion;
-        this.usuario = usuarioJugador;
         return retorno;
 
     }
@@ -49,7 +51,7 @@ public class Juego {
         boolean chequeoNumero = chequearLimite(intento);
         int[] retorno = new int [3];   
 
-        if (!chequeoNumero) {
+        if (chequeoNumero) {
 
             intentos++;
             
@@ -58,7 +60,7 @@ public class Juego {
                 String mensaje = "";
 
                 mensaje = usuario + "," + sesion + "," + intento;
-                erscribirRegistro(mensaje);
+                escribirRegistro(mensaje);
 
                 retorno[0]= 0;
                 retorno[1]= intentos;
@@ -82,7 +84,10 @@ public class Juego {
 
     }
 
-        public String cancelarPartida() {
+        /**
+         * @return String mostrando que terminó el juegoy cuál era el valor a adivinar.
+         */
+        public String cancelarPartida(String Usuario, int sesion) {
         
             return "Partida terminada: El númeroa a adivinar era: " + numTarget;
             
@@ -97,7 +102,7 @@ public class Juego {
         return (numero <= MAXIMO && numero >= MINIMO);
     }
 
-    public static void erscribirRegistro(String mensaje) {
+    public static void escribirRegistro(String mensaje) {
         try {
             Files.write(pathArchivo(), (mensaje + System.lineSeparator()).getBytes(), StandardOpenOption.CREATE,
                     StandardOpenOption.APPEND);
@@ -108,5 +113,22 @@ public class Juego {
 
     private static Path pathArchivo() {
         return Paths.get(ARCHIVO_DE_REGISTRO);
+    }
+
+    public static void leerRegistro(String filter) {
+        try (Stream<String> lines = Files.lines(Paths.get(ARCHIVO_DE_REGISTRO))) {
+            lines.filter(line -> line.contains(filter))
+                 .forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public int getNumTarget() {
+        return numTarget;
     }
 }
