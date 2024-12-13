@@ -24,18 +24,20 @@ $(document).ready(function() {
     } // fin bloque listar registros
 
 
-    // Crear
+    // Crear partida
     $("#nuevaPartida").on("click",function(){
+        
         $("#divNombre").show();
-        $("#divIntento").show();
-    
         var nombreNuevo = $("#nombre").val();
-        var intentoNuevo = $("#intento").val();
-        var contaIntentosNuevo = 1;
    //     var adivinarNuevo = 77;   // generar aleatoriamente en cada nueva partida
         if (nombreNuevo === "") { // Ni vacíos ni de tipo distinto a cadena
             alert("Por favor, introduzca un nombre");
             return;
+        } else {
+            $("#nuevaPartida").hide();  // En lugar de esconde, mejor deshabilitar
+            var intentoNuevo = $("#intento").val();
+            var contaIntentosNuevo = 1;
+            $("#divIntento").show();
         }
         $.ajax({
             url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes",
@@ -49,17 +51,16 @@ $(document).ready(function() {
             }),
             success: function(data) {
                 $("#resCrear").text("OK. Nuevo registro."); 
-                listar();
+             //   listar();
                 console.log(data);
             },
             error: function(data) {
                 console.log(data);
             }
         }); 
-
-    }) // fin bloque nueva partida
-
     
+    }) // fin bloque nueva partida
+        
 });
 
 console.log("jquery funcionando");
