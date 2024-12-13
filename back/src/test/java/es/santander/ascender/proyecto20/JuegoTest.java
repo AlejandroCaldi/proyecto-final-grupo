@@ -22,7 +22,7 @@ public class JuegoTest {
         String user = jueguito.getUsuario();
         String respuesta = jueguito.cancelarPartida(user, sesion);
 
-        assertEquals(respuesta,"Partida terminada: El númeroa a adivinar era: " + jueguito.getNumTarget());
+        assertEquals(respuesta,"Partida terminada: El número a adivinar era: " + jueguito.getNumTarget());
 
     }
 

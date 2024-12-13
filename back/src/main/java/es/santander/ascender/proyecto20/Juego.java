@@ -46,7 +46,7 @@ public class Juego {
      * @return un int[] array con el primer valor para saber si acertó, el id
      * @throws Exception si el número está fuera de rango.
      */
-     public int[] jugarIntento(String usuario, int intento, int sesion) throws Exception {
+     public int[] jugarIntento(String usuario, int intento, int sesion) throws MiExcepcion {
 
         boolean chequeoNumero = chequearLimite(intento);
         int[] retorno = new int [3];   
@@ -79,7 +79,7 @@ public class Juego {
             return retorno;
         } else  {
 
-            throw new Exception("El número está fuera de rango");
+            throw new MiExcepcion("El número está fuera de rango");
         }
 
     }
@@ -89,7 +89,7 @@ public class Juego {
          */
         public String cancelarPartida(String Usuario, int sesion) {
         
-            return "Partida terminada: El númeroa a adivinar era: " + numTarget;
+            return "Partida terminada: El número a adivinar era: " + numTarget;
             
         }
 

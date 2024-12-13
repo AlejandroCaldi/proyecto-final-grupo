@@ -21,12 +21,14 @@ public class App {
             int sesion = contestacion[1];
 
             int resultado;
+            Scanner scanner = new Scanner(System.in);
 
             while (sesion != 0) {
-                Scanner scanner = new Scanner(System.in);
-                int numeroaenviar = (int) scanner.nextInt();
-                int[] contestacion2;
                 try {
+                    System.out.println("Introduce tu nùmero entre 0 y 100; si quieres abandonar una letra: ");
+                    int numeroaenviar = (int) scanner.nextInt();
+                    int[] contestacion2;
+
                     contestacion2 = jueguito.jugarIntento(usuarioJugador, numeroaenviar, sesion);
                     resultado = contestacion2[0];
                     intentos = contestacion2[1];
@@ -35,19 +37,25 @@ public class App {
                     if (resultado == -1) {
                         System.out.println("El número es menor. Intentos hasta ahora " + intentos);
                     } else if (resultado == 0) {
-                        System.out.println("¡ACERT  EN " + intentos + "!");
+                        System.out.println("¡ACERTASTEIS  EN " + intentos + "!");
                         break;
                     } else if (resultado == 1) {
                         System.out.println("El número es mayor. Intentos hasta ahora " + intentos);
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (MiExcepcion e) {
+                    continue;
+                } catch (InputMismatchException e) {
+
+                    System.out.println(jueguito.cancelarPartida(usuarioJugador, sesion));
+                    break;
                 }
 
-                entrada.close();
-                scanner.close();
             }
+
+            entrada.close();
+            scanner.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
