@@ -65,6 +65,7 @@ $(document).ready(function() {
         }); 
     }) // fin bloque nueva partida
 
+    // Cancelar partida. Boton cancelar. ******************************************************************
     $("#cancelar").on("click", function(){
         // Volver a la situación inicial de la pantalla. Ocultar elementos.
     
@@ -78,9 +79,36 @@ $(document).ready(function() {
         $("#btnNuevaPartida").prop("disabled", false);  // habilitar el botón nueva partida
         $("#nombreJugador").val(""); // Vaciar input de entrada de nombre del jugador
         $("#respuestaServidor").val("").text("");
-
-
     })
+
+    // Intentar. (PUT) Jugador confirma pulsando botón intentar tras haber fijado un número. 
+        $('#intentar').on('click',function() {
+            
+            var intentoNuevo = $("#numero").val();
+
+
+        $.ajax({                                                                       // nº ??
+            url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes/2",
+            method: "PUT",
+            "data": JSON.stringify({
+
+            // TODO concretar datos de envío
+            // id: 1,
+            //  nombreJugador: nombreNuevo,
+                numIntento: intentoNuevo,  // pte. añadir a un array de intentos
+                
+            }),
+            success: function(data) {
+                $("#respuestaServidor").text("Enviado número seleccionado al servidor. PUT"); 
+                console.log(data);
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    });
+
+
 });
 
-console.log("jquery funcionando");
+console.log("Funcionando");
