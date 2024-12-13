@@ -3,7 +3,7 @@ $(document).ready(function() {
 // https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes
 
     $("#nombreJugador").val("");
-    $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
+  // BORRAR  $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
     $("#nombreJugador").focus(); 
     $("#btnNuevaPartida").show();
 
@@ -38,11 +38,12 @@ $(document).ready(function() {
             $("#nombreJugador").focus(); 
             return;
          } else {
-            $("#btnNuevaPartida").prop("disabled", true);  // Deshabilitar el botón
+            $("#btnNuevaPartida").prop("disabled", true).hide(50);  // Deshabilitar el botón
+
             var intentoNuevo = $("#intento").val();
             var contaIntentosNuevo = 1;
-            $("#divIntento").show();
-            $("#btnsIntentarYCancelar").show();
+            $("#divIntento").show(100);
+            $("#btnsIntentarYCancelar").show(100);
          }
         $.ajax({
             url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes",
@@ -70,13 +71,13 @@ $(document).ready(function() {
         // Volver a la situación inicial de la pantalla. Ocultar elementos.
     
         
-        $("#divIntento").hide();    // ocultar bloque que pregunta el número que quieres probar
+        $("#divIntento").hide(100);    // ocultar bloque que pregunta el número que quieres probar
         $("#btnsIntentarYCancelar").hide(100); // ocultar botones intentar (adivinar) y cancelar partida
 
         $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
         $("#nombreJugador").focus(); 
       //  $("#btnNuevaPartida").show(); // Mostrar botón nueva partida
-        $("#btnNuevaPartida").prop("disabled", false);  // habilitar el botón nueva partida
+        $("#btnNuevaPartida").prop("disabled", false).show(100);  // habilitar el botón nueva partida
         $("#nombreJugador").val(""); // Vaciar input de entrada de nombre del jugador
         $("#respuestaServidor").val("").text("");
     })

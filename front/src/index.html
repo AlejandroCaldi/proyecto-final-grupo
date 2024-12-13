@@ -43,7 +43,7 @@
                     <input id="nombreJugador" name="nombreJugador" class="text-center" size="15" value="" autofocus></span>
                  </div> -->
                  <div id="nombreJugador-container">
-                    <label id="nombreJugadorLabel" for="nombreJugador-input">¿Acaso tienes nombre, retador?</label>
+                    <label id="nombreJugadorLabel" for="nombreJugador">¿Acaso tienes nombre, retador?</label>
                     <input type="text" id="nombreJugador" placeholder="Escribe tu nombre" />
                   </div>
                   
@@ -51,12 +51,15 @@
                  <button id="btnNuevaPartida" class="btn btn-primary" hidden>Nueva partida</button>
                 </div>
            
-                 <div id="divIntento" class="text-center" hidden>  
+                <div id="divIntento" class="text-center" hidden>
                     <p id="mensajeIntento"></p>
-                    <p>¿Qué número estoy pensando (1-100)? 
-                    <span><input type="number" id="numero" min="1" max="100" value="50" size="3" placeholder="50"></span>
-                    </p>
-                 </div>
+                    <div id="divIntento-container">
+                      <label id="numPiensas" for="numero">¿Qué número estoy pensando (1-100)?</label>
+                      <input type="number" id="numero" min="1" max="100" value="50" size="3" placeholder="50">
+                    </div>
+                  </div>
+                  
+
                  <div id="btnsIntentarYCancelar" class="text-center" hidden>
                     <button id="intentar" class="btn btn-success">Intentar</button> 
                     <button id="cancelar" class="btn btn-secondary">Cancelar partida</button> 

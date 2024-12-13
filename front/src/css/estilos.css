@@ -1,6 +1,6 @@
 
 :root {
-    --bs-blue: #0d6efd;
+    /* --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
     --bs-purple: #6f42c1;
     --bs-pink: #d63384;
@@ -40,7 +40,7 @@
     --bs-light-rgb: 248, 249, 250;
     --bs-dark-rgb: 0, 0, 0;
     --bs-white-rgb: 255, 255, 255;
-    --bs-black-rgb: 0, 0, 0;
+    --bs-black-rgb: 0, 0, 0; */
     --bs-body-color-rgb: 0, 0, 0;
     --bs-body-bg-rgb: 255, 255, 255;
     --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -66,6 +66,8 @@
     --bs-link-hover-color: #224444;
     --bs-code-color: #d63384;
     --bs-highlight-bg: #fff3cd;
+
+    --bs-gray-400: #ced4da;
   }
   
 
@@ -115,7 +117,7 @@
     line-height: var(--bs-body-line-height);
     color: var(--bs-body-color);
     text-align: var(--bs-body-text-align);
-    background-color: var(--bs-gray-600);
+    background-color: var(--bs-gray-400);
 
 
  /* Imagen de fondo responsiva */
@@ -136,8 +138,8 @@
   }
 }
 #zonaJuego {
-    width: 80%; /* Asegura que ocupe el 80% del ancho en pantallas pequeñas */
-    max-width: 600px; /* Establece un máximo de ancho para pantallas grandes */
+    width: 90%; /* Asegura que ocupe el 80% del ancho en pantallas pequeñas */
+    max-width: 700px; /* Establece un máximo de ancho para pantallas grandes */
     background-color: rgba(238, 103, 14, 0.8); 
     color: rgb(2, 2, 2); /* Color de texto */
     padding: 10px;
@@ -254,7 +256,7 @@ input, label {
   align-items: center; /* Centra verticalmente el label y el input */
   width: 100%; /* Asegura que ocupe todo el ancho disponible */
   margin-bottom: 15px; /* Espacio entre campos */
-  border-radius: 50px; /* Bordes redondeados para dar un aspecto de botón */
+  border-radius: 15px; /* Bordes redondeados para dar un aspecto de botón */
   overflow: hidden; /* Oculta las partes fuera de los bordes redondeados */
   flex-wrap: wrap; /* Permite que los elementos se ajusten si el espacio es limitado */
 }
@@ -262,6 +264,7 @@ input, label {
 /* Estilo para el label (como parte del botón) */
 #nombreJugadorLabel {
   font-family: 'Roboto', sans-serif;
+  border-radius: 50px 0 0 50px; /* Bordes redondeados solo en la parte izquierda */
   font-weight: 500;
   font-size: 1.1em;
   color: white;
@@ -289,8 +292,9 @@ input, label {
   outline: none;
   background-color: #000000; /* Fondo claro */
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna para dar relieve */
-  width: 50%; /* Ocupa la mitad del ancho */
+  width: 30%; /* Ocupa la mitad del ancho */
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+  border-radius: 0 50px 50px 0; /* Bordes redondeados solo en la parte izquierda */
 }
 
 /* Suavizar el borde de focus del input */
@@ -345,6 +349,130 @@ input, label {
 @media (max-width: 360px) {
   /* Ajusta aún más el tamaño del label y el input */
   #nombreJugadorLabel, #nombreJugador {
+    font-size: 0.85em; /* Reduce aún más el tamaño de la fuente */
+    padding: 6px 10px; /* Reduce el padding */
+  }
+}
+
+/* Estilo para el contenedor del label y el input en #divIntento */
+#divIntento {
+  display: none; /* Mantenerlo oculto por defecto */
+  margin-bottom: 15px;
+}
+
+/* Contenedor para el label y el input en #divIntento */
+#divIntento-container {
+  display: flex;
+  align-items: center; /* Centra verticalmente el label y el input */
+  justify-content: space-between; /* Asegura que el espacio sea compartido entre los dos elementos */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  margin-bottom: 15px; /* Espacio entre campos */
+  border-radius: 15px; /* Bordes redondeados para dar un aspecto de botón */
+  overflow: hidden; /* Oculta las partes fuera de los bordes redondeados */
+  flex-wrap: wrap; /* Permite que los elementos se ajusten si el espacio es limitado */
+}
+
+/* Estilo para el contenedor de label y input */
+#divIntento-container {
+  display: flex;
+  align-items: center; /* Alinea verticalmente el label y el input */
+  width: 100%;
+  margin-bottom: 15px; /* Espacio entre campos */
+  justify-content: flex-start; /* Alinea a la izquierda */
+}
+
+/* Estilo para el label */
+#numPiensas {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1.1em;
+  color: white;
+  background: linear-gradient(45deg, #007bff, #6610f2); /* Degradado de color */
+  padding: 12px 20px;
+  text-align: center;
+  cursor: pointer;
+  width: auto; /* Deja que el ancho del label se ajuste al texto */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+  margin-right: 0px; /* Elimina el margen derecho */
+  border-radius: 50px 0 0 50px; /* Bordes redondeados solo en la parte izquierda */
+}
+
+/* Estilo para el input de número */
+#numero {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1em;
+  padding: 12px 10px;
+  border: none;
+  outline: none;
+  background-color: #000000; /* Fondo claro */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna para dar relieve */
+  width: 80px; /* Limita el ancho máximo a tres caracteres */
+  text-align: left; /* Alinea el texto a la izquierda */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  border-radius: 0 50px 50px 0; /* Bordes redondeados solo en la parte derecha */
+}
+
+/* Suavizar el borde de focus del input */
+#numero:focus {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 5px rgba(13, 202, 240, 0.7); /* Sombra interna y externa */
+  transform: translateY(-2px); /* Eleva ligeramente el input cuando tiene focus */
+}
+
+
+/* Suavizar el borde de focus del input */
+#numero:focus {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 5px rgba(13, 202, 240, 0.7); /* Sombra interna y externa */
+  transform: translateY(-2px); /* Eleva ligeramente el input cuando tiene focus */
+}
+
+
+/* Estilo cuando el input está deshabilitado o en estado de error */
+#numero:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+#numero.error {
+  background-color: #f8d7da; /* Fondo rojo para indicar error */
+  border: 1px solid #dc3545; /* Borde rojo */
+}
+
+/* Media Queries para hacer responsive */
+
+/* Ajustes para pantallas medianas (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Ajusta el tamaño del label y el input */
+  #numPiensas, #numero {
+    font-size: 1em; /* Reduce el tamaño de la fuente */
+    padding: 10px 15px; /* Reduce el padding */
+    width: 100%; /* Hace que ambos elementos ocupen el 100% del ancho */
+  }
+
+  /* Aplica una separación entre el label y el input */
+  #divIntento-container {
+    flex-direction: column; /* Los coloca uno debajo del otro */
+  }
+}
+
+/* Ajustes para pantallas pequeñas (max-width: 480px) */
+@media (max-width: 480px) {
+  /* Ajusta aún más el tamaño del label y el input */
+  #numPiensas, #numero {
+    font-size: 0.9em; /* Reduce el tamaño de la fuente */
+    padding: 8px 12px; /* Reduce aún más el padding */
+  }
+  
+  /* Mantén el contenedor en columna */
+  #divIntento-container {
+    flex-direction: column; /* Los coloca uno debajo del otro */
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas (max-width: 360px) */
+@media (max-width: 360px) {
+  /* Ajusta aún más el tamaño del label y el input */
+  #numPiensas, #numero {
     font-size: 0.85em; /* Reduce aún más el tamaño de la fuente */
     padding: 6px 10px; /* Reduce el padding */
   }
