@@ -35,28 +35,28 @@
 
                 <div class="contenedor">
                                                        
-               <p>¿Cuál es tu nombre, retador?</p>
-                <div id="divNombre" hidden>
+                 <p>¿Cuál es tu nombre, retador?</p>
+                 <div id="divNombre" hidden>
                     <p>Bien, que empiece la partida</p>
                     <label for="nombreJugador">Nombre: </label><span>
                     <input id="nombreJugador" name="nombreJugador" size="20" value="" autofocus></span>
-                </div>
-                <br>
-                <button id="nuevaPartida" class="btn btn-primary" hidden>Nueva partida</button>
-                <br>
-                <div id="divIntento" hidden>  <!-- hidden o style="display:none;" -->
-                <p id="mensajeIntento"></p>
-                            
-                <p>¿Qué número estoy pensando (0-100)? 
-                <span><input type="number" id="numero" min="1" max="100" value="50" size="3" placeholder="50"></span>
-                </p>
-                <button id="intentar" class="">Intentar</button> 
-                <button id="cancelar" class="">Cancelar partida</button> <!-- disabled -->
+                 </div>
+                 <br>
+                 <button id="btnNuevaPartida" class="btn btn-primary" hidden>Nueva partida</button>
+                 <br>
+                 <div id="divIntento" hidden>  
+                    <p id="mensajeIntento"></p>
+                    <p>¿Qué número estoy pensando (0-100)? 
+                    <span><input type="number" id="numero" min="1" max="100" value="50" size="3" placeholder="50"></span>
+                 </p>
+                 </div>
+                 <div id="btnsIntentarYCancelar" hidden>
+                    <button id="intentar" class="btn btn-success">Intentar</button> 
+                    <button id="cancelar" class="btn btn-secondary">Cancelar partida</button> 
+                
                  </div>
                 </div>
-
             </div>
-        
         </div>
         
         <!-- Lista de partidas previas-->
@@ -65,7 +65,7 @@
             
             
         </div>
-        <div id="resCrear" class=""></div>
+        <div id="respuestaServidor" class="">mensaje interno:</div>
 
             <!-- Pie de página -->
     <div class="footer">
