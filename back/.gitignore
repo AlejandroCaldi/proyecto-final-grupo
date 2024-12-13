@@ -34,3 +34,5 @@ build/
 .mvn/
 target/
 .parcel/
+
+/src/log.txt

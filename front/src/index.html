@@ -1,56 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Mentalistator : Adivina qué número estoy pensando</title>
-  <!--      <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
+        <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> 
 
-        <!-- Google fonts-->
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
-
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/estilos.css" rel="stylesheet" /> 
+        
+        <script src="../node_modules/jquery/dist/jquery.js"></script> 
+     
     </head>
     <body>
-
-        <div class="masthead">
-            <div class="masthead-content text-white">
-                <div class="container-fluid px-4 px-lg-0">
-                    <h1 class="fst-italic lh-1 mb-4">Mentalistator</h1>
-                    <p class="mb-5">Adivina en qué número estoy "pensando"</p>
-
-                        <div class="contenedor">
-                       
-                                                       
-                            <button id="nuevaPartida" class="btn btn-info btn-lg hover-shadow">Nueva partida</button>
-                            <br>
-                            <div id="intento" class="intento">  <!-- hidden o style="display:none;" -->
-                                <p id="mensajeIntento"></p>
-                            
-                                <p>¿Qué número estoy pensando (0-100)? 
-                                    <span><input type="number" id="numero" min="1" max="100" value="50" size="3" placeholder="50"></span>
-                                </p>
-                                <button id="intentar" class="btn btn-primary btn-lg hover-shadow">Intentar</button>
-                                <button id="cancelar" class="btn btn-secondary btn-lg hover-shadow">Cancelar partida</button>
-                            
-                            </div>
-                        </div>
-
+        <!-- <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-secondary">Secondary</button>
+        <button type="button" class="btn btn-success">Success</button>
+        <button type="button" class="btn btn-danger">Danger</button>
+        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" class="btn btn-info">Info</button>
+        <button type="button" class="btn btn-light">Light</button>
+        <button type="button" class="btn btn-dark">Dark</button> 
+        
+        <button type="button" class="btn btn-link">Link</button>-->
+        <div  id="zonaJuego">
+            
+                <div class="header text-center">
+                    <h1 class="display-2">Mentalistator</h1>
                 </div>
-            </div>
+                <h3 class="text-center">Adivina qué número estoy "pensando"</h3>
+
+                <div class="contenedor container-fluid">
+                   <!--                                      
+                 <p class="text-center">¿Cuál es tu nombre, retador?</p>
+                <div id="divNombre" class="text-center" hidden>
+                    
+                    <label for="nombreJugador">Nombre:  </label> <span>
+                    <input id="nombreJugador" name="nombreJugador" class="text-center" size="15" value="" autofocus></span>
+                 </div> -->
+                 <div id="nombreJugador-container">
+                    <label id="nombreJugadorLabel" for="nombreJugador">¿Acaso tienes nombre, retador?</label>
+                    <input type="text" id="nombreJugador" placeholder="Escribe tu nombre" />
+                  </div>
+                  
+                 <div class="text-center">
+                 <button id="btnNuevaPartida" class="btn btn-primary" hidden>Nueva partida</button>
+                </div>
+           
+                <div id="divIntento" class="text-center" hidden>
+                    <p id="mensajeIntento"></p>
+                    <div id="divIntento-container">
+                      <label id="numPiensas" for="numero">¿Qué número estoy pensando (1-100)?</label>
+                      <input type="number" id="numero" min="1" max="100" value="50" size="3" placeholder="50">
+                    </div>
+                  </div>
+                  
+
+                 <div id="btnsIntentarYCancelar" class="text-center" hidden>
+                    <button id="intentar" class="btn btn-success">Intentar</button> 
+                    <button id="cancelar" class="btn btn-secondary">Cancelar partida</button> 
+                
+                 </div>
+                </div>
+            
         </div>
         
         <!-- Lista de partidas previas-->
-        <div>
-            <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
-
-            </div>
+        <div id="registros">
+            <ul></ul>
+            
+            
         </div>
+        
+        <div id="respuestaServidor" class="text-bottom"></div>
+        
+            <!-- Pie de página -->
+    <div class="footer">
+        <!-- <p>&copy; 2024 Mentalistator SL. Todos los derechos reservados.</p> -->
+    </div>
 
-   <!--     <script src="javascript/scripts.js"></script> -->
+
+    
+    <script src="./javascript/index.js"></script>
     </body>
 </html>

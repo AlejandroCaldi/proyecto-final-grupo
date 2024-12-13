@@ -3,22 +3,26 @@
     {
       "id": 1,
       "nombre": "Pepe",
-      "apellido": "Pérez"
+      "intento": "",
+      "contador": ""
     },
     {
       "id": 2,
       "nombre": "Rodolfo",
-      "apellido": "García"
+      "intento": "",
+      "contador": ""
     },
     {
       "id": 3,
       "nombre": "María",
-      "apellido": "Fernández"
+      "intento": "",
+      "contador": ""
     },
     {
       "id": 4,
       "nombre": "Lucía",
-      "apellido": "Martínez"
+      "intento": "",
+      "contador": ""
     }
   ]
 }
