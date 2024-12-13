@@ -59,5 +59,6 @@ contestacion2[2] = sesion;
 ´´´´sh
 String cartelito jueguito.cancelarPartida();
 
-system.out.println(carterlio);
+System.out.println(cartelito);
 ````
+quieres salir del juego ? (SCANNNER)
