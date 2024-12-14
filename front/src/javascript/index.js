@@ -42,6 +42,7 @@ $(document).ready(function() {
 
             var intentoNuevo = $("#intento").val();
             var contaIntentosNuevo = 1;
+            $("#nombreJugador").prop("disabled", true);
             $("#divIntento").show(100);
             $("#btnsIntentarYCancelar").show(100);
          }
@@ -75,6 +76,7 @@ $(document).ready(function() {
         $("#btnsIntentarYCancelar").hide(100); // ocultar botones intentar (adivinar) y cancelar partida
 
         $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
+        $("#nombreJugador").prop("disabled", false);
         $("#nombreJugador").focus(); 
       //  $("#btnNuevaPartida").show(); // Mostrar botón nueva partida
         $("#btnNuevaPartida").prop("disabled", false).show(100);  // habilitar el botón nueva partida
