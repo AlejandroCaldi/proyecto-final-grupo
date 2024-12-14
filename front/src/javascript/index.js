@@ -82,33 +82,43 @@ $(document).ready(function() {
         $("#respuestaServidor").val("").text("");
     })
 
-    // Intentar. (PUT) Jugador confirma pulsando botón intentar tras haber fijado un número. 
-        $('#intentar').on('click',function() {
-            
-            var intentoNuevo = $("#numero").val();
+    // Validación del campo #numero
+    $('#numero').on('input', function() {
+        var value = $(this).val();
 
-
-        $.ajax({                                                                       // nº ??
-            url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes/2",
-            method: "PUT",
-            "data": JSON.stringify({
-
-            // TODO concretar datos de envío
-            // id: 1,
-            //  nombreJugador: nombreNuevo,
-                numIntento: intentoNuevo,  // pte. añadir a un array de intentos
-                
-            }),
-            success: function(data) {
-                $("#respuestaServidor").text("Enviado número seleccionado al servidor. PUT"); 
-                console.log(data);
-            },
-            error: function(data) {
-                console.log(data);
-            }
-        });
+        // Si el valor es menor que 1 o mayor que 100, lo restauramos a 50 (o cualquier valor predeterminado)
+        if (value < 1 || value > 100) {
+            $("#servidorRespuestas").text("Por favor, ingresa un número entre 1 y 100.");
+            $(this).val(50);  // Restaurar el valor predeterminado, en este caso 50
+        } else {
+            $("#servidorRespuestas").text(""); // Limpiar el mensaje de error si el valor es válido
+        }
     });
 
+    // Intentar (PUT) Jugador confirma pulsando botón intentar tras haber fijado un número
+    $('#intentar').on('click', function() {
+        var intentoNuevo = $("#numero").val();
+
+        // Solo si el número es válido (entre 1 y 100), se envía el PUT al servidor
+        if (intentoNuevo >= 1 && intentoNuevo <= 100) {
+            $.ajax({                                                                        // núm ?
+                url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes/2",
+                method: "PUT",
+                data: JSON.stringify({
+                    numIntento: intentoNuevo  // Enviar el intento
+                }),
+                success: function(data) {
+                    $("#respuestaServidor").text("Enviado número seleccionado al servidor. PUT");
+                    console.log(data);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        } else {
+            $("#servidorRespuestas").text("Por favor, indica un número entre 1 y 100.");
+        }
+    });
 
 });
 

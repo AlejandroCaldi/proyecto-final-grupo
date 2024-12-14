@@ -477,3 +477,68 @@ input, label {
     padding: 6px 10px; /* Reduce el padding */
   }
 }
+
+
+
+
+/* Estilo para el contenedor del label y el input */
+#nombreJugador-container,
+#divIntento-container {
+  display: flex;
+  justify-content: center; /* Centra los elementos en el eje horizontal */
+  align-items: center; /* Centra los elementos en el eje vertical */
+  width: 100%;
+  margin-bottom: 15px; /* Espacio entre campos */
+}
+
+/* Estilo para el label (como parte del botón) */
+#nombreJugadorLabel,
+#numPiensas {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1.1em;
+  color: white;
+  background: linear-gradient(45deg, #007bff, #6610f2); /* Degradado de color */
+  padding: 12px 20px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+  margin-right: 0px; /* Elimina el margen derecho */
+  border-radius: 50px 0 0 50px; /* Bordes redondeados solo en la parte izquierda */
+  display: inline-block; /* Permite que el label tenga tamaño según su contenido */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+/* Estilo para el input de número */
+#numero,
+#nombreJugador {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1em;
+  padding: 12px 10px;
+  border: none;
+  outline: none;
+  background-color: #000000; /* Fondo claro */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna para dar relieve */
+  width: auto; /* El ancho se ajusta al contenido */
+  text-align: left; /* Alinea el texto a la izquierda */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  border-radius: 0 50px 50px 0; /* Bordes redondeados solo en la parte derecha */
+}
+
+/* Suavizar el borde de focus del input */
+#numero:focus,
+#nombreJugador:focus {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 5px rgba(13, 202, 240, 0.7); /* Sombra interna y externa */
+  transform: translateY(-2px); /* Eleva ligeramente el input cuando tiene focus */
+}
+
+/* Estilo para la alineación de los elementos cuando el contenedor está centrado */
+#nombreJugador-container,
+#divIntento-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
