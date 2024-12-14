@@ -14,10 +14,10 @@ public class Juego {
     private final int INTENTOS_MAXIMO = 10;
     private int numTarget = (int) (Math.random() * 100) + 1;
     private int intentos;
-    private int sesion = 1;
+    private long sesion = 1;
     public String usuario = "";
 
-    private static final String ARCHIVO_DE_REGISTRO = "log.txt";
+    private static final String ARCHIVO_DE_REGISTRO = "~/log.txt";
 
     public Juego(String usuarioJugador) throws Exception {
 
@@ -28,10 +28,10 @@ public class Juego {
      * @param usuarioJugador
      * @return
      */
-    public int inicializarJuego() {
+    public long inicializarJuego() {
 
         this.intentos = 0;
-        this.sesion = 1;
+        this.sesion = (long) (Math.random()) * (9999999) + 1;
         return this.sesion;
 
     }

@@ -12,13 +12,13 @@ public class JuegoController {
     private Juego juego;
 
     /**
-     * @param usuario
-     * @return
-     */
-    @GetMapping("/start")
-    public int inicializar(String usuario) {
-        int sesion = juego.inicializarJuego();  
-        return sesion;
+    * @param usuario
+    * @return retorna el nùmero de sesiòn. 
+    */
+    @PostMapping("/inicio")
+    public long iniciarJuego(@RequestBody String getUsuario) {
+    long sesion = juego.inicializarJuego();  
+    return sesion;
     }
 
     /**
@@ -26,7 +26,7 @@ public class JuegoController {
      * @return
      * @throws MiExcepcion
      */
-    @GetMapping("/adivina/{number}")
+    @GetMapping("/adivina/{number}/{sesion}")
     public int[] adivinaNumber(@PathVariable int number) throws MiExcepcion {
         int[] result = juego.jugarIntento(number, number);
             return result;
@@ -40,3 +40,4 @@ public class JuegoController {
         return juego.getNumTarget();
     }
 }
+
