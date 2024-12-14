@@ -41,7 +41,7 @@ public class AppTest {
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
 
-            String mensaje =jueguito.cancelarPartida("Jugador1");
+            String mensaje =jueguito.cancelarPartida(13456);
             assertEquals("Partida terminada. El numero a adivinar era: " + jueguito.getNumTarget(),mensaje);
 
         } catch (InputMismatchException e) {

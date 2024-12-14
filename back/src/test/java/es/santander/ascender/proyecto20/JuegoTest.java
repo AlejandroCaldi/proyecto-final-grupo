@@ -19,8 +19,7 @@ public class JuegoTest {
     @Test
     void testCancelarPartida() {
         int sesion = 4;
-        String user = jueguito.getUsuario();
-        String respuesta = jueguito.cancelarPartida(user);
+        String respuesta = jueguito.cancelarPartida(sesion);
 
         assertEquals(respuesta,"Partida terminada: El número a adivinar era: " + jueguito.getNumTarget());
 

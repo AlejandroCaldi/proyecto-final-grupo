@@ -89,7 +89,7 @@ public class Juego {
     /**
      * @return String mostrando que terminó el juegoy cuál era el valor a adivinar.
      */
-    public String cancelarPartida(String Usuario) {
+    public String cancelarPartida(long sesion) {
 
             return "Partida terminada: El número a adivinar era: " + numTarget;
 

@@ -53,7 +53,7 @@ public class App {
 
                 } catch (InputMismatchException e) {
 
-                    System.out.println(jueguito.cancelarPartida(usuarioJugador));
+                    System.out.println(jueguito.cancelarPartida(sesion));
                     break;
                 }
 
