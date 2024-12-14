@@ -36,7 +36,7 @@ public class JuegoTest {
 
     @Test
     void testInicializarJuego() {
-        int sesion = jueguito.inicializarJuego();
+        long sesion = jueguito.inicializarJuego();
         assertEquals(1, sesion);
     }
 
