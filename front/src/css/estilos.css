@@ -76,6 +76,7 @@
   src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
   font-weight: 400; /* Regular */
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -121,7 +122,7 @@
 
 
  /* Imagen de fondo responsiva */
-    background-image: url('../assets/robotFondoIA\.png');
+    background-image: url('../assets/robotFondoIA.png');
     
     background-size: cover; /* Asegura que la imagen cubra toda el área */
     background-position: center; /* Centra la imagen de fondo */
@@ -140,13 +141,13 @@
 #zonaJuego {
     width: 90%; /* Asegura que ocupe el 80% del ancho en pantallas pequeñas */
     max-width: 700px; /* Establece un máximo de ancho para pantallas grandes */
-    background-color: rgba(238, 103, 14, 0.8); 
+    background-color: rgba(157, 228, 225, 0.95); /*rgba(238, 103, 14, 0.8); rgba(181, 143, 250, 0.9);*/
     color: rgb(2, 2, 2); /* Color de texto */
     padding: 0px 0px 10px 0px;
     border-radius: 10px; /* Opcional: bordes redondeados */
     margin: 0 auto; /* Centra el bloque */
     font-family: 'Roboto', sans-serif;
-    animation: fadeIn 1.6s ease-out; /* Aparece suavemente */
+    animation: fadeIn 1.4s ease-out; /* Aparece suavemente */
 }
 
 /* Ajustes para pantallas medianas */
@@ -166,6 +167,7 @@ h1 {
   font-size: 6vw; /* Esto hará que el tamaño del texto sea proporcional al ancho de la pantalla */
   font-family: 'Roboto', sans-serif;
   font-weight: 700; /* Bold */
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7); /* Sombra blanca con leve difuminado */
 }
 
 @media (max-width: 768px) {
@@ -184,6 +186,7 @@ h3 {
   font-family: 'Roboto', sans-serif;
   font-weight: 700; /* Bold */
   font-style: italic;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7); /* Sombra blanca con leve difuminado */
 }
 @media (max-width: 768px) {
 h3 {
@@ -244,7 +247,7 @@ input, label {
   padding: 10px; /* Espaciado alrededor del texto */
   border-radius: 10px; /* Bordes redondeados */
   border: 1px solid #ccc; /* Borde sutil */
-  max-width: 30%; /* Asegura que el mensaje no ocupe todo el ancho */
+  max-width: 35%; /* Asegura que el mensaje no ocupe todo el ancho */
   margin: 30px auto; /* Centra el bloque y da espacio alrededor */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
   text-align: center; /* Alineación de texto al centro */
@@ -547,4 +550,6 @@ input, label {
   align-items: center;
  
 }
+
+
 
