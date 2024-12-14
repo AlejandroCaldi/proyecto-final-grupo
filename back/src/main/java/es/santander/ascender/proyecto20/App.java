@@ -7,7 +7,6 @@ public class App {
     public static void main(String args[]) {
 
         final int INTENTOS_MAXIMO = 10;
-        int intentos_restantes = 10;
 
         Scanner entrada = new Scanner(System.in);
 
@@ -19,9 +18,9 @@ public class App {
         try {
             jueguito = new Juego(usuarioJugador);
 
-            int contestacion = jueguito.inicializarJuego();
+            long contestacion = jueguito.inicializarJuego();
             int intentos = 0;
-            int sesion = contestacion;
+            long sesion = contestacion;
 
             int resultado;
             Scanner scanner = new Scanner(System.in);
