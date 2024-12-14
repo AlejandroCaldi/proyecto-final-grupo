@@ -7,13 +7,17 @@ ATRIBUTOS EN EL BACKEND:
     private final int MAXIMO = 100;
     private final int INTENTOS_MAXIMO = 10;
     private int numTarget = (int) (Math.random() * 100) + 1;
-    private int intentos;
-    private int sesion = 1;
-    public String usuario = "";
+    private int intentos;               // contaIntentos en el FRONT
+    private int sesion = 1;             // sesion en el FRONT
+    public String usuario = "";         // nombreJugador en el FRONT.
+                                        // numIntento en el FRONT (el nº que introduce el usuario)
+    retorno[0] = 0/1/-1
+    retorno[1] = número de intentos
 
 */
 
-
+    var sesion = 0; // Variable para guardar la sesión actual
+    var estado = ""; // 0-acertaste/1-es mayor/-1-el 'numTarget' es menor que el introducido por el usuario
 
     $("#nombreJugador").val("");
   // BORRAR  $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
@@ -44,7 +48,7 @@ ATRIBUTOS EN EL BACKEND:
     // Crear nueva partida ************************************************************************
     $("#btnNuevaPartida").on("click", function() {
         $("#numero").val("");
-        var nombreNuevo = $("#nombreJugador").val();
+            var nombreNuevo = $("#nombreJugador").val();
     //     var adivinarNuevo = 77;   // generar aleatoriamente en cada nueva partida
          if (nombreNuevo === "") { // Ni vacíos ni de tipo distinto a cadena
             $("#respuestaServidor").text("Introduce un nombre si quieres retarme.");
@@ -69,7 +73,8 @@ ATRIBUTOS EN EL BACKEND:
                 nombreJugador: nombreNuevo,
                 numIntento: intentoNuevo,  // pte. añadir a un array de intentos
                 contaIntentos: contaIntentosNuevo,
-            //    adivinar: adivinaNum;
+                // TODO estado -1, 0, +1 ... estado
+            
             }),
             success: function(data) {
                 $("#respuestaServidor").text("Partida creada. POST."); 
@@ -127,6 +132,17 @@ ATRIBUTOS EN EL BACKEND:
                 }),
                 success: function(data) {
                     $("#respuestaServidor").text("Enviado número seleccionado al servidor. PUT");
+                    let mensaje = "";
+                    
+                    if (data.estado == "-1") {
+                        mensaje = "El número es mayor.";
+                    } else if (data.estado == "1") {
+                        mensaje = "El número es menor.";
+                    } else {
+                        mensaje = "¡Acertaste!.";
+                        data.estado = "0"; 
+                    }
+                    $("#respuestaServidor").text(mensaje);
                     console.log(data);
                 },
                 error: function(data) {
@@ -136,6 +152,12 @@ ATRIBUTOS EN EL BACKEND:
         } else {
             $("#servidorRespuestas").text("Por favor, indica un número entre 0 y 100.");
         }
+
+        // TODO : tratamiento de respuesta del servidor:
+        // -1, el número pensado es menor que el propuesto. 
+        //  0, ¡Acertaste!
+        // +1, el número pensado es mayor que el propuesto por el jugador.
+        // Mostrar contador de intentos. Puede servir #servidorRespuestas
     });
 
 });

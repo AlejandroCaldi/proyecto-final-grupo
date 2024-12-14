@@ -12,36 +12,17 @@
         integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> 
 
         <link href="css/estilos.css" rel="stylesheet" /> 
-        
-        <script src="../node_modules/jquery/dist/jquery.js"></script> 
-     
+        <script src="../node_modules/jquery/dist/jquery.js"></script>      
     </head>
     <body>
-        <!-- <button type="button" class="btn btn-primary">Primary</button>
-        <button type="button" class="btn btn-secondary">Secondary</button>
-        <button type="button" class="btn btn-success">Success</button>
-        <button type="button" class="btn btn-danger">Danger</button>
-        <button type="button" class="btn btn-warning">Warning</button>
-        <button type="button" class="btn btn-info">Info</button>
-        <button type="button" class="btn btn-light">Light</button>
-        <button type="button" class="btn btn-dark">Dark</button> 
-        
-        <button type="button" class="btn btn-link">Link</button>-->
         <div  id="zonaJuego">
-            
                 <div class="header text-center">
                     <h1 class="display-2">Mentalistator</h1>
                 </div>
                 <h3 class="text-center">Adivina qué número estoy "pensando"</h3>
 
                 <div class="contenedor container-fluid">
-                   <!--                                      
-                 <p class="text-center">¿Cuál es tu nombre, retador?</p>
-                <div id="divNombre" class="text-center" hidden>
-                    
-                    <label for="nombreJugador">Nombre:  </label> <span>
-                    <input id="nombreJugador" name="nombreJugador" class="text-center" size="15" value="" autofocus></span>
-                 </div> -->
+
                  <div id="nombreJugador-container">
                     <label id="nombreJugadorLabel" for="nombreJugador">¿Acaso tienes nombre, retador?</label>
                     <input type="text" id="nombreJugador" maxlength="15" placeholder="Escribe tu nombre" />
@@ -72,19 +53,14 @@
         <!-- Lista de partidas previas-->
         <div id="registros">
             <ul></ul>
-            
-            
         </div>
         
         <div id="respuestaServidor" class="text-bottom"></div>
         
             <!-- Pie de página -->
     <div class="footer">
-        <!-- <p>&copy; 2024 Mentalistator SL. Todos los derechos reservados.</p> -->
+        <!-- <p>&copy; 2024 Mentalistator SL. Alejandro, Rodrigo & Juanma</p> -->
     </div>
-
-
-    
     <script src="./javascript/index.js"></script>
     </body>
 </html>
