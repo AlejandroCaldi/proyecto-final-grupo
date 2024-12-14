@@ -28,7 +28,7 @@ public class App {
 
             while (sesion != 0) {
                 try {
-                    System.out.println("Introduce tu nùmero entre 0 y 100; si quieres abandonar una letra: ");
+                    System.out.println("Introduce tu número entre 0 y 100; si quieres abandonar introduce una letra: ");
                     int numeroaenviar = (int) scanner.nextInt();
                     int[] contestacion2;
 
@@ -37,16 +37,16 @@ public class App {
                     intentos = contestacion2[1];
 
                     if (resultado == -1) {
-                        System.out.println("El número es menor. Intentos hasta ahora " + intentos + ". Quedan " + (INTENTOS_MAXIMO - intentos));
+                        System.out.println("El número es menor. Intentos hasta ahora " + intentos + ". Quedan " + (INTENTOS_MAXIMO - intentos) + ".");
                     } else if (resultado == 0) {
                         System.out.println("¡ACERTASTEIS  EN " + intentos + "!");
                         break;
                     } else if (resultado == 1) {
-                        System.out.println("El número es mayor. Intentos hasta ahora " + intentos + ". Quedan " + (INTENTOS_MAXIMO - intentos));
+                        System.out.println("El número es mayor. Intentos hasta ahora " + intentos + ". Quedan " + (INTENTOS_MAXIMO - intentos) + ".");
                     }
 
                 } catch (MiExcepcion e) {
-                    if (e.getMessage().equals("No quedan mas intentos")){
+                    if (e.getMessage().equals("No quedan mas intentos.")){
                         System.out.println(e.getMessage());
                         break;
                     }
