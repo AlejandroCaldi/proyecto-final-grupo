@@ -26,8 +26,8 @@ public class JuegoController {
      * @return
      * @throws MiExcepcion
      */
-    @GetMapping("/guess/{number}")
-    public int[] guessNumber(@PathVariable int number) throws MiExcepcion {
+    @GetMapping("/adivina/{number}")
+    public int[] adivinaNumber(@PathVariable int number) throws MiExcepcion {
         int[] result = juego.jugarIntento(number, number);
             return result;
     }
