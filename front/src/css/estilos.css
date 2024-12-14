@@ -43,8 +43,8 @@
     --bs-black-rgb: 0, 0, 0; */
     --bs-body-color-rgb: 0, 0, 0;
     --bs-body-bg-rgb: 255, 255, 255;
-    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    /* --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; */
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
     --bs-body-font-family: 'Roboto', sans-serif;
     --bs-body-font-size: 1.5em;
@@ -142,11 +142,11 @@
     max-width: 700px; /* Establece un máximo de ancho para pantallas grandes */
     background-color: rgba(238, 103, 14, 0.8); 
     color: rgb(2, 2, 2); /* Color de texto */
-    padding: 10px;
+    padding: 0px 0px 10px 0px;
     border-radius: 10px; /* Opcional: bordes redondeados */
     margin: 0 auto; /* Centra el bloque */
     font-family: 'Roboto', sans-serif;
-    animation: fadeIn 0.8s ease-out; /* Aparece suavemente */
+    animation: fadeIn 1.6s ease-out; /* Aparece suavemente */
 }
 
 /* Ajustes para pantallas medianas */
@@ -183,16 +183,19 @@ h3 {
   font-size: 2vw; /* Esto hará que el tamaño del texto sea proporcional al ancho de la pantalla */
   font-family: 'Roboto', sans-serif;
   font-weight: 700; /* Bold */
+  font-style: italic;
 }
 @media (max-width: 768px) {
 h3 {
       font-size: 3vw; /* Ajuste para pantallas más pequeñas */
+      font-style: italic;
   }
 }
 
 @media (max-width: 480px) {
 h3 {
       font-size: 3vw; /* Ajuste para pantallas muy pequeñas */
+      font-style: italic;
   }
 }
 input, label {
@@ -241,10 +244,10 @@ input, label {
   padding: 10px; /* Espaciado alrededor del texto */
   border-radius: 10px; /* Bordes redondeados */
   border: 1px solid #ccc; /* Borde sutil */
-  max-width: 40%; /* Asegura que el mensaje no ocupe todo el ancho */
-  margin: 10px auto; /* Centra el bloque y da espacio alrededor */
+  max-width: 30%; /* Asegura que el mensaje no ocupe todo el ancho */
+  margin: 30px auto; /* Centra el bloque y da espacio alrededor */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  text-align: left; /* Alineación de texto a la izquierda */
+  text-align: center; /* Alineación de texto al centro */
   line-height: 1.6; /* Espaciado entre líneas */
   transition: all 0.3s ease; /* Suaviza los cambios de estilo */
 }
@@ -272,7 +275,7 @@ input, label {
   padding: 12px 20px;
   text-align: center;
   cursor: pointer;
-  width: 50%; /* Ocupa la mitad del ancho */
+  width: 40%; /* Ocupa la mitad del ancho */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
   transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
 }
@@ -292,7 +295,7 @@ input, label {
   outline: none;
   background-color: #000000; /* Fondo claro */
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna para dar relieve */
-  width: 30%; /* Ocupa la mitad del ancho */
+  width: 20%; /* Ocupa la mitad del ancho */
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   border-radius: 0 50px 50px 0; /* Bordes redondeados solo en la parte izquierda */
 }
@@ -524,6 +527,9 @@ input, label {
   text-align: left; /* Alinea el texto a la izquierda */
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   border-radius: 0 50px 50px 0; /* Bordes redondeados solo en la parte derecha */
+  font-weight: 900; /* Black */
+  font-style: normal;
+  text-transform: uppercase;
 }
 
 /* Suavizar el borde de focus del input */

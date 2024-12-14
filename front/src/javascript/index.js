@@ -1,6 +1,19 @@
 $(document).ready(function() {
 
 // https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes
+/*
+ATRIBUTOS EN EL BACKEND:
+    private final int MINIMO = 0;
+    private final int MAXIMO = 100;
+    private final int INTENTOS_MAXIMO = 10;
+    private int numTarget = (int) (Math.random() * 100) + 1;
+    private int intentos;
+    private int sesion = 1;
+    public String usuario = "";
+
+*/
+
+
 
     $("#nombreJugador").val("");
   // BORRAR  $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
@@ -42,6 +55,9 @@ $(document).ready(function() {
 
             var intentoNuevo = $("#intento").val();
             var contaIntentosNuevo = 1;
+            $("#nombreJugador").prop("disabled", true).hide();
+            $("#nombreJugador-container").hide();
+
             $("#divIntento").show(100);
             $("#btnsIntentarYCancelar").show(100);
          }
@@ -75,6 +91,8 @@ $(document).ready(function() {
         $("#btnsIntentarYCancelar").hide(100); // ocultar botones intentar (adivinar) y cancelar partida
 
         $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
+        $("#nombreJugador").prop("disabled", false).show(); // el show está justo debajo...
+        $("#nombreJugador-container").show();
         $("#nombreJugador").focus(); 
       //  $("#btnNuevaPartida").show(); // Mostrar botón nueva partida
         $("#btnNuevaPartida").prop("disabled", false).show(100);  // habilitar el botón nueva partida
@@ -87,7 +105,7 @@ $(document).ready(function() {
         var value = $(this).val();
 
         // Si el valor es menor que 1 o mayor que 100, lo restauramos a 50 (o cualquier valor predeterminado)
-        if (value < 1 || value > 100) {
+        if (value < 0 || value > 100) {
             $("#servidorRespuestas").text("Por favor, ingresa un número entre 1 y 100.");
             $(this).val(50);  // Restaurar el valor predeterminado, en este caso 50
         } else {
@@ -116,7 +134,7 @@ $(document).ready(function() {
                 }
             });
         } else {
-            $("#servidorRespuestas").text("Por favor, indica un número entre 1 y 100.");
+            $("#servidorRespuestas").text("Por favor, indica un número entre 0 y 100.");
         }
     });
 
