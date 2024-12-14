@@ -146,8 +146,10 @@
     padding: 0px 0px 10px 0px;
     border-radius: 10px; /* Opcional: bordes redondeados */
     margin: 0 auto; /* Centra el bloque */
+    margin-top: 15%;
     font-family: 'Roboto', sans-serif;
     animation: fadeIn 1.4s ease-out; /* Aparece suavemente */
+    border: 4px solid #2c3e50; /* Puedes cambiar el color y grosor del borde */
 }
 
 /* Ajustes para pantallas medianas */
