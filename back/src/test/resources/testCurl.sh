@@ -6,7 +6,7 @@ URL="http://localhost:8080/juego/"
 # varaibles para testeo 
 USERNAME='"jugador"' # usuario en el primer payload. 
 
-GUESS_NUMBER=50 # numero pasado para adivinar por parte del jugador. 
+GUESS_NUMBER='{"numero": 50}' # numero pasado para adivinar por parte del jugador. 
  
 
 # Primer request inicializando
@@ -20,7 +20,7 @@ echo -e "\n"
 
 
 # curl intentando adivinar el número. 
-curl -X POST $URL"adivinar/" \
+curl -X POST $URL"adivinar" \
 -H "Content-Type: application/json" \
 -d "$GUESS_NUMBER" \
 -b cookies.txt  # con - b recupera el valor de la cookie del primer curl. 

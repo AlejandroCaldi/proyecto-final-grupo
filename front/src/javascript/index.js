@@ -18,13 +18,14 @@ ATRIBUTOS EN EL BACKEND:
 
     var sesion = 0; // Variable para guardar la sesión actual
     var estado = ""; // 0-acertaste/1-es mayor/-1-el 'numTarget' es menor que el introducido por el usuario
+    const URL_SERVIDOR = "http://localhost:8080/juego/";
 
     $("#nombreJugador").val("");
   // BORRAR  $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
     $("#nombreJugador").focus(); 
     $("#btnNuevaPartida").show();
 
-    // listar registros
+    // listar registros. No implementado del lado del servidor (todavía) 
     function listar() {
         $.get("https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes", function(data) {
             $("#registros").empty();  // Limpiar el contenido antes de agregar nuevos registros
@@ -66,18 +67,19 @@ ATRIBUTOS EN EL BACKEND:
             $("#btnsIntentarYCancelar").show(100);
          }
         $.ajax({
-            url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes",
+            url: URL_SERVIDOR + "inicio",
             method: "POST",
-            "data": JSON.stringify({
-                id: 0,     // Cero indica creación 
-                nombreJugador: nombreNuevo,
-                numIntento: intentoNuevo,  // pte. añadir a un array de intentos
-                contaIntentos: contaIntentosNuevo,
+            data: JSON.stringify({"getUsuario": nombreNuevo }),
+            // "data": JSON.stringify({
+            //     id: 0,     // Cero indica creación 
+            //     nombreJugador: nombreNuevo,
+            //     numIntento: intentoNuevo,  // pte. añadir a un array de intentos
+            //     contaIntentos: contaIntentosNuevo,
                 // TODO estado -1, 0, +1 ... estado
+            // }
             
-            }),
             success: function(data) {
-                $("#respuestaServidor").text("Partida creada. POST."); 
+                $("#respuestaServidor").text("Partida creada. POST. usuario:" + data.sessionID); 
              //   listar();
                 console.log(data);
             },
@@ -90,6 +92,20 @@ ATRIBUTOS EN EL BACKEND:
     // Cancelar partida. Boton cancelar. ******************************************************************
     $("#cancelar").on("click", function(){
         // Volver a la situación inicial de la pantalla. Ocultar elementos.
+        // Pedir al servidor el número que querìamos adivinar. 
+        $.ajax({                                                                        // núm ?
+            //url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes/2",
+            url: URL_SERVIDOR+"cancelar",
+            type: 'POST',
+            success: function(data) {
+                $("#respuestaServidor").text("El número a adivinar era " + data.Numero);
+                console.log(data);
+            },
+            error: function(data) {
+                console.log("error en la cancelación");
+                console.log(data);
+            }
+        });
     
         
         $("#divIntento").hide(100);    // ocultar bloque que pregunta el número que quieres probar
@@ -123,13 +139,15 @@ ATRIBUTOS EN EL BACKEND:
         var intentoNuevo = $("#numero").val();
 
         // Solo si el número es válido (entre 1 y 100), se envía el PUT al servidor
+        console.log(intentoNuevo);
         if (intentoNuevo >= 1 && intentoNuevo <= 100) {
+            intentoPayload = {numero: intentoNuevo};
             $.ajax({                                                                        // núm ?
-                url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes/2",
-                method: "PUT",
-                data: JSON.stringify({
-                    numIntento: intentoNuevo  // Enviar el intento
-                }),
+                //url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes/2",
+                url: URL_SERVIDOR+"adivinar/",
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(intentoPayload),
                 success: function(data) {
                     $("#respuestaServidor").text("Enviado número seleccionado al servidor. PUT");
                     let mensaje = "";
@@ -161,5 +179,3 @@ ATRIBUTOS EN EL BACKEND:
     });
 
 });
-
-console.log("Funcionando");
