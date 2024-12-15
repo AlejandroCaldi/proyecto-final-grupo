@@ -1,7 +1,6 @@
 package es.santander.ascender.proyecto20;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.*;
@@ -22,14 +21,14 @@ public class AppTest {
         int respuesta = resultado.get("respuesta").intValue();
         assertTrue(respuesta == 0 || respuesta == 1 || respuesta == -1);
 
-        // MiExcepcion exception = assertThrows(MiExcepcion.class, () -> jueguito.jugarIntento(120, 1));
-        // assertEquals("El número está fuera de rango", exception.getMessage());
-
     }
 
 
 
-    @Test //comprobar que la accion de cancelar partida introduciendo una letra funciona bien 
+    /**
+     * Comprobar que la accion de cancelar partida introduciendo una letra funciona bien 
+     */
+    @Test 
     void testCancelacionDePartida(){
         try {
             Juego jueguito = new Juego("Jugador1");

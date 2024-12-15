@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +15,14 @@ import es.santander.ascender.proyecto20.MiExcepcion;
 @RequestMapping("/juego")
 public class JuegoController {
 
-    // To store session ID for isolation within the controller
+    // para almacenar el id para la sesiòn de consola. 
     private long sesion = 0;
 
     /**
-     * Starts a new game and stores it in the HTTP session.
-     * @param getUsuario The player name sent by the client.
-     * @param session The HTTP session for managing session attributes.
-     * @return A response containing the session ID.
+     *Empieza el juego inicializando el objeto juego, preservando el httoSession como id de sesión. .
+     * @param getUsuario El nombre de jugador que ha pasado el cliente. 
+     * @param session La sesión de Http que servirá como identificador. 
+     * @return id de Sesión. 
           * @throws Exception 
           */
          @PostMapping("/inicio")
@@ -43,7 +42,7 @@ public class JuegoController {
     }
 
     /**
-     * Cancels the game for the player and returns the result.
+     * Cancela el juego y envía el número que se debia haber adivinado. 
      * 
      * @param session The HTTP session to retrieve the game instance.
      * @return A response containing the result of cancelling the game.

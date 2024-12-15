@@ -19,6 +19,7 @@ public class Juego {
     private long sesion;
     public String usuario = "";
 
+    // Lugar donde se va a guardar el archivo con las jugadas registradas. 
     private static final String ARCHIVO_DE_REGISTRO = System.getProperty("user.dir") + "/log.txt";
 
     public Juego(String usuarioJugador) throws Exception {
@@ -33,7 +34,8 @@ public class Juego {
     public long inicializarJuego() {
 
         this.intentos = 0;
-        this.sesion = (long) (Math.random() * 999999999) + 1;
+        this.sesion = (long) (Math.random() * 999999999) + 1; // Para el caso de consola. En caso de Rest se lleva por otro lado. 
+                                                              // y este número se desestima. 
 
         System.out.println("Número Sesión: " + this.sesion);
         return this.sesion;
@@ -84,6 +86,8 @@ public class Juego {
     }
 
     /**
+     * 
+     * @param sesion Solo se usa en caso de juego por consola. Pero por ahrao no se hace nada con él, queda pra funturas implementaciones. 
      * @return String mostrando que terminó el juegoy cuál era el valor a adivinar.
      */
     public int cancelarPartida(long sesion) {
@@ -125,10 +129,14 @@ public class Juego {
     }
 
     public static void escribirRegistro(String mensaje) {
+
         try {
+
             Files.write(pathArchivo(), (mensaje + System.lineSeparator()).getBytes(), StandardOpenOption.CREATE,
                     StandardOpenOption.APPEND);
+
         } catch (IOException e) {
+
             e.printStackTrace();
         }
     }
@@ -138,10 +146,13 @@ public class Juego {
     }
 
     public static void leerRegistro(String filter) {
+
         try (Stream<String> lines = Files.lines(Paths.get(ARCHIVO_DE_REGISTRO))) {
             lines.filter(line -> line.contains(filter))
                     .forEach(System.out::println);
+
         } catch (IOException e) {
+            
             e.printStackTrace();
         }
     }

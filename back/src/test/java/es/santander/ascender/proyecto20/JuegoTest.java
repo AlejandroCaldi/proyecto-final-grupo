@@ -41,7 +41,9 @@ public class JuegoTest {
         assertTrue(sesion > 0);
 }
     /**
+     * Testear las potenciales respeustas en aso de adivinar, quedarse corto o largo. 
      * @throws Exception n caso de que el númeroa  adivinar sea negativo o mayor a 100, no relevante al test. 
+     * 
      */
     @Test 
     void testJugarIntento() throws Exception {
