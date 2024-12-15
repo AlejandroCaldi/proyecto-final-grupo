@@ -35,4 +35,4 @@ build/
 target/
 .parcel/
 
-/src/log.txt
+cookies.txt
