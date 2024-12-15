@@ -141,6 +141,7 @@ ATRIBUTOS EN EL BACKEND:
         // Solo si el número es válido (entre 1 y 100), se envía el PUT al servidor
         console.log(intentoNuevo);
         if (intentoNuevo >= 1 && intentoNuevo <= 100) {
+
             intentoPayload = {numero: intentoNuevo};
             $.ajax({                                                                        // núm ?
                 //url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes/2",
@@ -148,6 +149,7 @@ ATRIBUTOS EN EL BACKEND:
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(intentoPayload),
+
                 success: function(data) {
                     $("#respuestaServidor").text("Enviado número seleccionado al servidor. PUT");
                     let mensaje = "";
@@ -162,6 +164,11 @@ ATRIBUTOS EN EL BACKEND:
                     }
                     $("#respuestaServidor").text(mensaje);
                     console.log(data);
+                },
+                success: function(data) {
+                    var mensaje = data.resultado.respuesta === 0 ? "¡Acertaste!" :
+                                  (data.resultado.respuesta === 1 ? "El número es mayor." : "El número es menor.");
+                    $("#respuestaServidor").text(mensaje);
                 },
                 error: function(data) {
                     console.log(data);
