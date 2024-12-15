@@ -23,8 +23,10 @@ public class AppTest {
     void testEntradaValida() throws Exception {
         Juego jueguito = new Juego ("Jugador1");
         jueguito.inicializarJuego();
-        int[] resultado = jueguito.jugarIntento(50,1);
-        assertTrue(resultado[0] == 0 || resultado[0] == 1 || resultado[0] == -1);
+        Map<String, Number> resultado = jueguito.jugarIntento(50,1);
+
+        int respuesta = resultado.get("respuesta").intValue();
+        assertTrue(respuesta == 0 || respuesta == 1 || respuesta == -1);
     }
     /* 
     @Test
@@ -41,7 +43,9 @@ public class AppTest {
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
 
-            String mensaje =jueguito.cancelarPartida(13456);
+            int numero =jueguito.cancelarPartida(13456);
+
+            String mensaje = "Partida terminada. El numero a adivinar era: " + numero;
             assertEquals("Partida terminada. El numero a adivinar era: " + jueguito.getNumTarget(),mensaje);
 
         } catch (InputMismatchException e) {

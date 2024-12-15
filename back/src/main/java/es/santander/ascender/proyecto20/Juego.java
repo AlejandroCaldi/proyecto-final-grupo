@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class Juego {
@@ -17,7 +19,7 @@ public class Juego {
     private long sesion;
     public String usuario = "";
 
-    private static final String ARCHIVO_DE_REGISTRO = "~/log.txt";
+    private static final String ARCHIVO_DE_REGISTRO = System.getProperty("user.dir") + "/log.txt";
 
     public Juego(String usuarioJugador) throws Exception {
 
@@ -45,40 +47,35 @@ public class Juego {
      * @return un int[] array con el primer valor para saber si acertó, el id
      * @throws Exception si el número está fuera de rango.
      */
-    public int[] jugarIntento(int numeroCliente, int sesion) throws MiExcepcion {
+    public Map<String, Number> jugarIntento(int numeroCliente, long sesion) throws MiExcepcion {
 
-        boolean chequeoNumero = chequearLimite(numeroCliente);
-        int[] retorno = new int[2];
+        boolean chequeoNumero = chequearLimite(numeroCliente);     
 
         if (chequeoNumero) {
 
             if (this.intentos < INTENTOS_MAXIMO) {
+
                 this. intentos++;
 
                 if (numeroCliente == numTarget) {
 
-                    String mensaje = "";
-
-                    mensaje = usuario + "," + sesion + "," + numeroCliente;
-                    escribirRegistro(mensaje);
-
-                    retorno[0] = 0;
-                    retorno[1] = intentos;
-                    return retorno;
+                    return armarMapyLog(usuario, sesion, numeroCliente, numTarget, 0, intentos);
+                    
                 }
+
                 if (numeroCliente > numTarget) {
-                    retorno[0] = -1;
-                    retorno[1] = intentos;
-                    return retorno;
+
+                    return armarMapyLog(usuario, sesion, numeroCliente, numTarget, -1, intentos);
+
                 }
-                retorno[0] = 1;
-                retorno[1] = intentos;
-                return retorno;
+
+                return armarMapyLog(usuario, sesion, numeroCliente, numTarget, 1, intentos);
 
             } else {
 
-                throw new MiExcepcion("No quedan mas intentos");
+                throw new MiExcepcion("No quedan mas intentos.");
             }
+
         } else {
 
             throw new MiExcepcion("El número está fuera de rango");
@@ -89,11 +86,34 @@ public class Juego {
     /**
      * @return String mostrando que terminó el juegoy cuál era el valor a adivinar.
      */
-    public String cancelarPartida(long sesion) {
+    public int cancelarPartida(long sesion) {
 
-            return "Partida terminada: El número a adivinar era: " + numTarget;
+            return numTarget;
 
     }
+
+    /**
+     * La funciòn graba en archivo la actividad y devuelve un map con los datos de si acertò en màs o en menos, y la cantidad de intentos. 
+     * @param usuario el usuario pasado para grabar en log
+     * @param sesion el id de sesion, para guardar en archivo. 
+     * @param numeroCliente el número int de 0 a 100 que arriesgó el jugador. 
+     * @param numTarget el número que debe adivinar
+     * @param acerto el valor de acierto a devolver al cliente, -1 es en menos, 0 acertó y 1 en largo. 
+     * @param intentos la cantidad de intentos efectuada por el jugador para la sesión 
+     * @return un hash para responder los datos de acierto o no, y la cantidad de intentos incurridos. 
+     */
+    private Map<String, Number> armarMapyLog(String usuario, long sesion, long numeroCliente, int numTarget, int acerto, int intentos) {
+
+        String mensaje = usuario + "," + sesion + "," + numeroCliente + "," + numTarget;
+        Map<String, Number> retorno = new HashMap<>();
+        
+        escribirRegistro(mensaje);
+
+        retorno.put("respuesta",acerto);
+        retorno.put("intentos",intentos);
+
+        return retorno;
+    }   
 
     /**
      * @param numero el valor pasado por el jugador.
