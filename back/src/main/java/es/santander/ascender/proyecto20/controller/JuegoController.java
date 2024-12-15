@@ -49,13 +49,15 @@ public class JuegoController {
      * @return A response containing the result of cancelling the game.
      */
     @PutMapping("/cancelar")
-    public ResponseEntity<Integer> cancelarJuego(@RequestBody Map<String, Long> request, HttpSession session) {
+    public ResponseEntity<Map<String, Number>> cancelarJuego(@RequestBody Map<String, Long> payload, HttpSession session) {
 
-        long sessionID = request.get("sessionID");
+        Long sessionID = payload.get("sessionID");
         Juego juego = (Juego) session.getAttribute("juego");
 
-        int respuesta = juego.cancelarPartida(sessionID);
+        int numeroEra = juego.cancelarPartida(sessionID);
+        Map<String, Number> respuesta = new HashMap<>();
 
+        respuesta.put("Numero", numeroEra);
         return ResponseEntity.ok(respuesta);
 
     }
@@ -70,14 +72,14 @@ public class JuegoController {
      * @throws MiExcepcion. Para el caso de que se pase un texto o un valor menor a 0 o mayor a 100. 
      */
     @PostMapping("/adivinar/")
-    public ResponseEntity<Map<String, Number>> adivinaNumero(@RequestBody int numero, Map<String, Long> request, HttpSession session) throws MiExcepcion {
+    public ResponseEntity<Map<String, Number>> adivinaNumero(@RequestBody int numero, HttpSession session) throws MiExcepcion {
 
-    long sessionID = request.get("sessionID");
-    Juego juego = (Juego) session.getAttribute("juego");
+        long sessionID = (long) session.getAttribute("sessionID");
+        Juego juego = (Juego) session.getAttribute("juego");
 
-    Map<String, Number> respuesta = juego.jugarIntento(numero, sessionID);
+        Map<String, Number> respuesta = juego.jugarIntento(numero, sessionID);
 
-    return ResponseEntity.ok(respuesta);
+        return ResponseEntity.ok(respuesta);
 
     }
 
