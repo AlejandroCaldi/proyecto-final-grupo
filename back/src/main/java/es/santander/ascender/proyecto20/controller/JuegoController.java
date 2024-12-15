@@ -69,7 +69,7 @@ public class JuegoController {
      *         se trta de -1 si el dato es menor, 0 si acertó, o 1 s el número es mayor. 
      * @throws MiExcepcion. Para el caso de que se pase un texto o un valor menor a 0 o mayor a 100. 
      */
-    @GetMapping("/adivinar/")
+    @PostMapping("/adivinar/")
     public ResponseEntity<Map<String, Number>> adivinaNumero(@RequestBody int numero, Map<String, Long> request, HttpSession session) throws MiExcepcion {
 
     long sessionID = request.get("sessionID");

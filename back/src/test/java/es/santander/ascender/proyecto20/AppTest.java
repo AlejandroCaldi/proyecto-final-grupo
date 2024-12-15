@@ -1,6 +1,7 @@
 package es.santander.ascender.proyecto20;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.*;
@@ -12,13 +13,6 @@ import org.junit.jupiter.api.Test;
  */
 public class AppTest {
 
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue() {
-        assertTrue(true);
-    }
     @Test //comprueba que el juego acepte una entrada valida de un numero dentro del rango permitido
     void testEntradaValida() throws Exception {
         Juego jueguito = new Juego ("Jugador1");
@@ -27,21 +21,19 @@ public class AppTest {
 
         int respuesta = resultado.get("respuesta").intValue();
         assertTrue(respuesta == 0 || respuesta == 1 || respuesta == -1);
+
+        // MiExcepcion exception = assertThrows(MiExcepcion.class, () -> jueguito.jugarIntento(120, 1));
+        // assertEquals("El número está fuera de rango", exception.getMessage());
+
     }
-    /* 
-    @Test
-    void testIntentosMaximos() {
-        
-    }
-    */
+
+
+
     @Test //comprobar que la accion de cancelar partida introduciendo una letra funciona bien 
     void testCancelacionDePartida(){
         try {
             Juego jueguito = new Juego("Jugador1");
             jueguito.inicializarJuego();
-
-            Scanner scanner = new Scanner(System.in);
-            scanner.nextLine();
 
             int numero =jueguito.cancelarPartida(13456);
 

@@ -37,10 +37,9 @@ public class JuegoTest {
     @Test
     void testInicializarJuego() {
         long sesion = jueguito.inicializarJuego();
-        assertEquals(1, sesion);
-    }
-
-    
+        assertTrue(sesion < 999999999);
+        assertTrue(sesion > 0);
+}
     /**
      * @throws Exception n caso de que el númeroa  adivinar sea negativo o mayor a 100, no relevante al test. 
      */
@@ -52,6 +51,11 @@ public class JuegoTest {
         Map<String, Number> respuesta = jueguito.jugarIntento(numeroAdivinar, 1);
 
         assertTrue(respuesta.get("respuesta").intValue()==0);
+
+        respuesta = jueguito.jugarIntento(numeroAdivinar+2, 1);
+        assertTrue(respuesta.get("respuesta").intValue()==-1);
+
+        respuesta = jueguito.jugarIntento(numeroAdivinar-2, 1);
         assertTrue(respuesta.get("respuesta").intValue()==1);
     }
 
