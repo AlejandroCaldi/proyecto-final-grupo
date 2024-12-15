@@ -21,7 +21,6 @@ ATRIBUTOS EN EL BACKEND:
     const URL_SERVIDOR = "http://localhost:8080/juego/";
 
     $("#nombreJugador").val("");
-  // BORRAR  $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
     $("#nombreJugador").focus(); 
     $("#btnNuevaPartida").show();
 
@@ -56,7 +55,7 @@ ATRIBUTOS EN EL BACKEND:
             $("#nombreJugador").focus(); 
             return;
          } else {
-            $("#btnNuevaPartida").prop("disabled", true).hide(50);  // Deshabilitar el botón
+            $("#btnNuevaPartida").prop("disabled", true).hide(50);  
 
             var intentoNuevo = $("#intento").val();
             var contaIntentosNuevo = 1;
@@ -80,7 +79,7 @@ ATRIBUTOS EN EL BACKEND:
             
             success: function(data) {
                 $("#respuestaServidor").text("Partida creada. POST. usuario:" + data.sessionID); 
-             //   listar();
+             // listar();   // No implementado del lado del servidor aún.
                 console.log(data);
             },
             error: function(data) {
@@ -115,7 +114,7 @@ ATRIBUTOS EN EL BACKEND:
         $("#nombreJugador").prop("disabled", false).show(); // el show está justo debajo...
         $("#nombreJugador-container").show();
         $("#nombreJugador").focus(); 
-      //  $("#btnNuevaPartida").show(); // Mostrar botón nueva partida
+
         $("#btnNuevaPartida").prop("disabled", false).show(100);  // habilitar el botón nueva partida
         $("#nombreJugador").val(""); // Vaciar input de entrada de nombre del jugador
         $("#respuestaServidor").val("").text("");
@@ -184,5 +183,4 @@ ATRIBUTOS EN EL BACKEND:
         // +1, el número pensado es mayor que el propuesto por el jugador.
         // Mostrar contador de intentos. Puede servir #servidorRespuestas
     });
-
 });
