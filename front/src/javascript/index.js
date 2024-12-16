@@ -55,7 +55,7 @@ $(document).ready(function() {
             data: JSON.stringify({"getUsuario": nombreNuevo }),
             contentType: 'application/json',
             success: function(data) {
-                $("#respuestaServidor").text("Partida creada. POST. usuario:" + data.sessionID);
+                $("#respuestaServidor").text("Partida creada. Usuario:" + data.sessionID);
                 sessionID = data.sessionID; 
              // listar();   // No implementado del lado del servidor aún.
                 console.log(data);
@@ -88,14 +88,12 @@ $(document).ready(function() {
         $("#divIntento").hide(100);    // ocultar bloque que pregunta el número que quieres probar
         $("#btnsIntentarYCancelar").hide(100); // ocultar botones intentar (adivinar) y cancelar partida
 
-        $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
-        $("#nombreJugador").prop("disabled", false).show(); // el show está justo debajo...
+        // $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
+        $("#nombreJugador").prop("disabled", false).show().focus().val(""); // el show está justo debajo...
         $("#nombreJugador-container").show();
-        $("#nombreJugador").focus(); 
 
         $("#btnNuevaPartida").prop("disabled", false).show(100);  // habilitar el botón nueva partida
-        $("#nombreJugador").val(""); // Vaciar input de entrada de nombre del jugador
-        $("#respuestaServidor").val("").text("");
+         $("#respuestaServidor").val("").text("");
     })
 
     $('#numero').on('input', function() {
@@ -135,7 +133,7 @@ $(document).ready(function() {
                         mensaje = "¡Acertaste!.";
                         data.estado = "0"; 
                     }
-                    $("#respuestaServidor").text(mensaje);
+                    $("#respuestaServidor").text(mensaje+ " "+ "Intentos: "+data.intentos);
                     console.log(data);
                 },
                 success: function(data) {
