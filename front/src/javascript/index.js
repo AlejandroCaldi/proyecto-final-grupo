@@ -10,6 +10,7 @@ $(document).ready(function() {
     $("#nombreJugador").focus(); 
     $("#btnNuevaPartida").show();
 
+
     // listar registros. No implementado del lado del servidor (todavía) 
     function listar() {
         $.get("https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes", function(data) {
@@ -35,8 +36,8 @@ $(document).ready(function() {
     $("#btnNuevaPartida").on("click", function() {
         $("#numero").val("");
         let nombreNuevo = $("#nombreJugador").val();
-        if (nombreNuevo === "") { // Ni vacíos ni de tipo distinto a cadena
-            $("#respuestaServidor").text("Introduce un nombre si quieres retarme.");
+         if (nombreNuevo === "") { // Ni vacíos ni de tipo distinto a cadena
+            $("#respuestaServidor").text("Introduce un nombre si quieres retarme.").addClass("aviso");
             $("#nombreJugador").focus(); 
             return;
          } else {
@@ -49,7 +50,13 @@ $(document).ready(function() {
 
             $("#divIntento").show(100);
             $("#btnsIntentarYCancelar").show(100);
-        }
+
+                 // Foco en el campo número después de mostrar los controles del juego
+            setTimeout(function() {
+               $("#numero").focus();
+             }, 200);  // Retraso de 200ms para asegurarse de que los elementos estén visibles
+             $("#respuestaServidor").text("").removeClass("aviso");
+         }
         $.ajax({
             url: URL_SERVIDOR + "inicio",
             method: "POST",
@@ -89,22 +96,28 @@ $(document).ready(function() {
         $("#divIntento").hide(100);    // ocultar bloque que pregunta el número que quieres probar
         $("#btnsIntentarYCancelar").hide(100); // ocultar botones intentar (adivinar) y cancelar partida
 
-        // $("#divNombre").show();  // Muestra input para que el jugador introduzca el nombre
+
         $("#nombreJugador").prop("disabled", false).show().focus().val(""); // el show está justo debajo...
         $("#nombreJugador-container").show();
 
         $("#btnNuevaPartida").prop("disabled", false).show(100);  // habilitar el botón nueva partida
-         $("#respuestaServidor").val("").text("");
+        $("#respuestaServidor").val("").text("").removeClass("acertaste perdiste aviso mayor menor error");
     })
 
+    // Validación del campo #numero
     $('#numero').on('input', function() {
         let value = $(this).val();
-        
-        if (value < 0 || value > 100) {
-            $("#servidorRespuestas").text("Por favor, ingresa un número entre 1 y 100.");
-        //    $(this).val(50);  // Restaurar el valor predeterminado, en este caso 50
+     //   $("#respuestasServidor").text("").removeClass("acertaste error aviso mayor menor");
+        // Si no es un valor numérico [0-100] pone valor por defecto: 50.
+        if (!value || isNaN(value) || value < 0 || value > 100) {
+            $("#numero").focus();
+
+            $("#servidorRespuestas").text("Por favor, ingresa un número entre 0 y 100.").addClass("aviso");;
+            $(this).val(50);  // Restaurar el valor predeterminado, en este caso 50
+            
         } else {
-            $("#servidorRespuestas").text(""); // Limpiar el mensaje de error si el valor es válido
+            $("#respuestaServidor").val("").text("").removeClass("acertaste perdiste aviso mayor menor error");
+
         }
     });
 
@@ -112,9 +125,9 @@ $(document).ready(function() {
     $('#intentar').on('click', function() {
         let intentoNuevo = $("#numero").val();
 
-        // Solo si el número es válido (entre 1 y 100)
+        // Solo si el número es válido (entre 0 y 100)
         console.log(intentoNuevo);
-        if (intentoNuevo >= 1 && intentoNuevo <= 100) {
+        if (intentoNuevo >= 0 && intentoNuevo <= 100) {
 
             $.ajax({
                 url: URL_SERVIDOR+"adivinar",
@@ -132,7 +145,9 @@ $(document).ready(function() {
                             contentType: 'application/json',
                             data: JSON.stringify({"sessionID": sessionID}),
                             success: function(dataC) {
-                                $("#respuestaServidor").text("Perdiste: El número a adivinar era " + dataC.Numero);
+                                $("#respuestaServidor").val("").text("").removeClass("acertaste perdiste aviso mayor menor error");
+                                $("#respuestaServidor").addClass("perdiste");
+                                $("#respuestaServidor").text("¡Oh Perdiste!. El número a adivinar era " + dataC.Numero);
                                 console.log(dataC);
                             },
                             error: function(dataC) {
@@ -141,17 +156,21 @@ $(document).ready(function() {
                             }
                         });
                     } else {
+                       // $("#respuestaServidor").val("").text("").removeClass("acertaste perdiste aviso mayor menor error");
                         if (data.respuesta == 1) {
-                            mensaje = "El número es mayor.";
+                            mensaje = "El número es MAYOR. ";
+                            $("#respuestaServidor").addClass("mayor");
                         } else if (data.respuesta == -1) {
-                            mensaje = "El número es menor.";
-                        } else {
-                            mensaje = "¡Acertaste!.";
+                            mensaje = "El número es MENOR.  ";
+                            $("#respuestaServidor").addClass("menor");
+                    } else {
+                            mensaje = "¡Acertaste!. ";
+                            $("#respuestaServidor").addClass("acertaste"); 
                             data.estado = 0; 
-                        }
+                    }
                         if(INTENTOS_MAXIMOS-data.intentos==0) {
 
-                            ("#respuestaServidor").text(mensaje + "Ùltimo intento!");
+                            ("#respuestaServidor").text(mensaje + "¡Último intento!");
                         } else{
                             $("#respuestaServidor").text(mensaje + "Intentos restantes: " + (INTENTOS_MAXIMOS-data.intentos));
                         }
@@ -163,7 +182,11 @@ $(document).ready(function() {
                 }
             });
         } else {
-            $("#servidorRespuestas").text("Por favor, indica un número entre 0 y 100.");
+            $("#servidorRespuestas").text("Por favor, indica un número entre 0 y 100.").addClass("aviso");
         }
+
+        // -1, el número pensado es menor que el propuesto. 
+        //  0, ¡Acertaste!
+        // +1, el número pensado es mayor que el propuesto por el jugador.
     });
 });

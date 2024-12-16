@@ -196,19 +196,55 @@ input, label {
 #respuestaServidor {
   font-family: 'Roboto', sans-serif; /* Fuente atractiva */
   font-weight: 400; /* Regular */
-  font-size: 1em; /* Tamaño de texto adecuado */
-  color: #333; /* Color de texto oscuro */
+  font-size: 1.2em; /* Tamaño de texto adecuado */
+  color: #000000; /* Color de texto oscuro */
   background-color: #f8f9fa; /* Fondo claro para resaltar el mensaje */
   padding: 10px; /* Espaciado alrededor del texto */
-  border-radius: 10px; /* Bordes redondeados */
+  border-radius: 25px; /* Bordes redondeados */
   border: 1px solid #ccc; /* Borde sutil */
-  max-width: 55%; /* Asegura que el mensaje no ocupe todo el ancho */
+  max-width: 65%; /* Asegura que el mensaje no ocupe todo el ancho */
   margin: 30px auto; /* Centra el bloque y da espacio alrededor */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
   text-align: center; /* Alineación de texto al centro */
   line-height: 1.6; /* Espaciado entre líneas */
   transition: all 0.3s ease; /* Suaviza los cambios de estilo */
 }
+
+
+/* Fondo verde para mensaje de éxito */
+#respuestaServidor.acertaste {
+  background-color: #035817; /* Verde */
+  color: #fffefe; /* Color de texto oscuro */
+
+}
+/* Fondo negro para mensaje de perdiste */
+#respuestaServidor.perdiste {
+  background-color: #000000; /* negro */
+  color: #ffffff; /* Color de texto oscuro */
+}
+
+/* Fondo rojo para mensaje de error */
+#respuestaServidor.error {
+  background-color: #8b0512; /* Rojo */
+  color: #000000; /* Color de texto oscuro */
+}
+
+
+/* Fondo azul para mensaje informativo */
+#respuestaServidor.mayor {
+  background-color: #49d5eb; /* Azul */
+}
+/* Fondo azul para mensaje informativo */
+#respuestaServidor.menor {
+  background-color: #ff66d9; /* Azul */
+  color: #000000; /* Color de texto oscuro */
+}
+/* Fondo naranja para mensaje de aviso. Se requiere introducir nombre, por ejemplo. */
+#respuestaServidor.aviso {
+  background-color: #e07902; /* Azul */
+  color: #000000; /* Color de texto oscuro */
+}
+
 
 
 /* Estilo para el contenedor del label y el input */
@@ -233,7 +269,7 @@ input, label {
   padding: 12px 20px;
   text-align: center;
   cursor: pointer;
-  width: 40%; /* Ocupa la mitad del ancho */
+  width: 45%; /* Ocupa la mitad del ancho */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
   transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
 }
