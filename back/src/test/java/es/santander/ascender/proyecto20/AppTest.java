@@ -73,7 +73,7 @@ public class AppTest {
      */
     @Test
     void testNombreValido() {
-        String input = "Rodrigo\n"; 
+        String input = "Rodrigo"; 
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         assertDoesNotThrow(() -> App.main(new String[]{}));
