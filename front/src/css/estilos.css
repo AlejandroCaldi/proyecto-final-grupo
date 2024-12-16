@@ -202,7 +202,7 @@ input, label {
   padding: 10px; /* Espaciado alrededor del texto */
   border-radius: 10px; /* Bordes redondeados */
   border: 1px solid #ccc; /* Borde sutil */
-  max-width: 35%; /* Asegura que el mensaje no ocupe todo el ancho */
+  max-width: 55%; /* Asegura que el mensaje no ocupe todo el ancho */
   margin: 30px auto; /* Centra el bloque y da espacio alrededor */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
   text-align: center; /* Alineación de texto al centro */
