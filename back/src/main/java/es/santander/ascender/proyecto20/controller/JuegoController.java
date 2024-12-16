@@ -8,15 +8,20 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import es.santander.ascender.proyecto20.Guess;
 import es.santander.ascender.proyecto20.Juego;
 import es.santander.ascender.proyecto20.MiExcepcion;
+import es.santander.ascender.proyecto20.Partida;
+import es.santander.ascender.proyecto20.Usuario;
 
+@CrossOrigin(origins = "http://localhost:1234")
 @RestController
 @RequestMapping("/juego")
 public class JuegoController {
 
     // para almacenar el id para la sesiòn de consola. 
-    private long sesion = 0;
+    
+    private Map<Long, Juego> jugadores = new HashMap<>();
 
     /**
     *Empieza el juego inicializando el objeto juego, preservando el httoSession como id de sesión. .
@@ -25,40 +30,36 @@ public class JuegoController {
     * @return id de Sesión. 
     * @throws Exception 
     */
-    @CrossOrigin(origins = "http://localhost:1234")
-    @RequestMapping(value = "/inicio", method = RequestMethod.POST)
     @PostMapping("/inicio")
-    public ResponseEntity<Map<String, Object>> iniciarJuego(@RequestBody String getUsuario, HttpSession session) throws Exception {
-    
-    Juego juego = new Juego(getUsuario);
-    
-    this.sesion = juego.inicializarJuego();
-    
-    session.setAttribute("juego", juego);
-    session.setAttribute("sessionID", this.sesion);
+    public ResponseEntity<Map<String, Object>> iniciarJuego(@RequestBody Usuario getUsuario) throws Exception {
+        
+        String usuario = getUsuario.getGetUsuario();
+        Juego juego = new Juego(usuario);
+        long sesion = (long) (Math.random() * 999999999) + 1;
+        jugadores.put(sesion, juego);
+        juego.inicializarJuego();
 
-    Map<String, Object> response = new HashMap<>();
-    response.put("sessionID", this.sesion);
 
-    return ResponseEntity.ok(response);
+        Map<String, Object> response = new HashMap<>();
+        response.put("sessionID", sesion);
+
+        return ResponseEntity.ok(response);
 }
 
     /**
      * Cancela el juego y envía el número que se debia haber adivinado. 
      * 
-     * @param session The HTTP session to retrieve the game instance.
-     * @return A response containing the result of cancelling the game.
+     * @param session @return A response containing the result of cancelling the game.
      */
-    @CrossOrigin(origins = "http://localhost:1234")
-    @RequestMapping(value = "/cancelar", method = RequestMethod.PUT)
-    @PutMapping("/cancelar")
-    public ResponseEntity<Map<String, Number>> cancelarJuego(@RequestBody Map<String, Long> payload, HttpSession session) {
+    @PostMapping("/cancelar")
+    public ResponseEntity<Map<String, Number>> cancelarJuego(@RequestBody Partida partida) {
 
-        Long sessionID = payload.get("sessionID");
-        Juego juego = (Juego) session.getAttribute("juego");
+        long session = partida.getSessionID();
+        Juego juego = (Juego) jugadores.get(session);
 
-        int numeroEra = juego.cancelarPartida(sessionID);
+        int numeroEra = juego.cancelarPartida(session);
         Map<String, Number> respuesta = new HashMap<>();
+        jugadores.remove(session, juego);
 
         respuesta.put("Numero", numeroEra);
         return ResponseEntity.ok(respuesta);
@@ -76,13 +77,14 @@ public class JuegoController {
      */
     @CrossOrigin(origins = "http://localhost:1234")
     @PostMapping("/adivinar")
-    public ResponseEntity<Map<String, Number>> adivinaNumero(@RequestBody Map<String, Integer> payload, HttpSession session) throws MiExcepcion {
+    public ResponseEntity<Map<String, Number>> adivinaNumero(@RequestBody Guess guess) throws MiExcepcion {
 
-        int numero = payload.get("numero");
-        long sessionID = (long) session.getAttribute("sessionID");
-        Juego juego = (Juego) session.getAttribute("juego");
+        long sesion = guess.getSessionID();
 
-        Map<String, Number> respuesta = juego.jugarIntento(numero, sessionID);
+        int numero = guess.getGuess();
+        Juego juego = (Juego) jugadores.get(sesion);
+
+        Map<String, Number> respuesta = juego.jugarIntento(numero, sesion);
 
         return ResponseEntity.ok(respuesta);
 

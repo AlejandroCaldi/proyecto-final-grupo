@@ -3,6 +3,7 @@ $(document).ready(function() {
     var sesion = 0; // Variable para guardar la sesión actual
     
     const URL_SERVIDOR = "http://localhost:8080/juego/";
+    let sessionID = 0;
 
     $("#nombreJugador").val("");
     $("#nombreJugador").focus(); 
@@ -52,9 +53,10 @@ $(document).ready(function() {
             url: URL_SERVIDOR + "inicio",
             method: "POST",
             data: JSON.stringify({"getUsuario": nombreNuevo }),
-            
+            contentType: 'application/json',
             success: function(data) {
-                $("#respuestaServidor").text("Partida creada. POST. usuario:" + data.sessionID); 
+                $("#respuestaServidor").text("Partida creada. POST. usuario:" + data.sessionID);
+                sessionID = data.sessionID; 
              // listar();   // No implementado del lado del servidor aún.
                 console.log(data);
             },
@@ -70,6 +72,8 @@ $(document).ready(function() {
         $.ajax({                                                                                   
             url: URL_SERVIDOR+"cancelar",
             type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({"sessionID": sessionID}),
             success: function(data) {
                 $("#respuestaServidor").text("El número a adivinar era " + data.Numero);
                 console.log(data);
@@ -113,15 +117,14 @@ $(document).ready(function() {
         console.log(intentoNuevo);
         if (intentoNuevo >= 1 && intentoNuevo <= 100) {
 
-            intentoPayload = {numero: intentoNuevo};
-            $.ajax({                                                                 
-                url: URL_SERVIDOR+"adivinar/",
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(intentoPayload),
-
+            $.ajax({
+                url: "http://localhost:8080/juego/adivinar",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ "sessionID": sessionID,
+                                        "numero": Number(intentoNuevo)}),
                 success: function(data) {
-                    $("#respuestaServidor").text("Enviado número seleccionado al servidor. PUT");
+                    $("#respuestaServidor").text("Enviado número seleccionado al servidor. POST");
                     let mensaje = "";
                     
                     if (data.estado == "-1") {
