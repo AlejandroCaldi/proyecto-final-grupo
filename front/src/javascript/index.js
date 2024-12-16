@@ -56,7 +56,7 @@ $(document).ready(function() {
             data: JSON.stringify({"getUsuario": nombreNuevo }),
             contentType: 'application/json',
             success: function(data) {
-                $("#respuestaServidor").text("Partida creada. Usuario:" + data.sessionID);
+                $("#respuestaServidor").text("Partida creada. Sesión: " + data.sessionID);
                 sessionID = data.sessionID; 
              // listar();   // No implementado del lado del servidor aún.
                 console.log(data);
@@ -123,17 +123,16 @@ $(document).ready(function() {
                 data: JSON.stringify({ "sessionID": sessionID,
                                         "numero": Number(intentoNuevo)}),
                 success: function(data) {
-                    $("#respuestaServidor").text("Enviado número seleccionado al servidor. POST");
 
                     let mensaje = "";
-                    if (data.INTENTOS_MAXIMOS - intentos < 0) {
+                    if (INTENTOS_MAXIMOS - data.intentos < 1) {
                         $.ajax({                                                                                   
                             url: URL_SERVIDOR+"cancelar",
                             type: 'POST',
                             contentType: 'application/json',
                             data: JSON.stringify({"sessionID": sessionID}),
                             success: function(dataC) {
-                                $("#respuestaServidor").text("El número a adivinar era " + dataC.Numero);
+                                $("#respuestaServidor").text("Perdiste: El número a adivinar era " + dataC.Numero);
                                 console.log(dataC);
                             },
                             error: function(dataC) {
@@ -150,9 +149,14 @@ $(document).ready(function() {
                             mensaje = "¡Acertaste!.";
                             data.estado = 0; 
                         }
-                        $("#respuestaServidor").text(mensaje + "Intentos restantes: " + (INTENTOS_MAXIMOS-data.intentos));
-                        console.log(data);
+                        if(INTENTOS_MAXIMOS-data.intentos==0) {
+
+                            ("#respuestaServidor").text(mensaje + "Ùltimo intento!");
+                        } else{
+                            $("#respuestaServidor").text(mensaje + "Intentos restantes: " + (INTENTOS_MAXIMOS-data.intentos));
+                        }
                     }
+                    
                 },
                 error: function(data) {
                     console.log(data);
