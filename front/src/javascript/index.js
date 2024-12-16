@@ -1,23 +1,7 @@
 $(document).ready(function() {
 
-// https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes
-/*
-ATRIBUTOS EN EL BACKEND:
-    private final int MINIMO = 0;
-    private final int MAXIMO = 100;
-    private final int INTENTOS_MAXIMO = 10;
-    private int numTarget = (int) (Math.random() * 100) + 1;
-    private int intentos;               // contaIntentos en el FRONT
-    private int sesion = 1;             // sesion en el FRONT
-    public String usuario = "";         // nombreJugador en el FRONT.
-                                        // numIntento en el FRONT (el nº que introduce el usuario)
-    retorno[0] = 0/1/-1
-    retorno[1] = número de intentos
-
-*/
-
     var sesion = 0; // Variable para guardar la sesión actual
-    var estado = ""; // 0-acertaste/1-es mayor/-1-el 'numTarget' es menor que el introducido por el usuario
+    
     const URL_SERVIDOR = "http://localhost:8080/juego/";
 
     $("#nombreJugador").val("");
@@ -45,12 +29,11 @@ ATRIBUTOS EN EL BACKEND:
         });
     } // fin bloque listar registros
 
-    // Crear nueva partida ************************************************************************
+    // Crear nueva partida 
     $("#btnNuevaPartida").on("click", function() {
         $("#numero").val("");
-            var nombreNuevo = $("#nombreJugador").val();
-    //     var adivinarNuevo = 77;   // generar aleatoriamente en cada nueva partida
-         if (nombreNuevo === "") { // Ni vacíos ni de tipo distinto a cadena
+        var nombreNuevo = $("#nombreJugador").val();
+        if (nombreNuevo === "") { // Ni vacíos ni de tipo distinto a cadena
             $("#respuestaServidor").text("Introduce un nombre si quieres retarme.");
             $("#nombreJugador").focus(); 
             return;
@@ -64,18 +47,11 @@ ATRIBUTOS EN EL BACKEND:
 
             $("#divIntento").show(100);
             $("#btnsIntentarYCancelar").show(100);
-         }
+        }
         $.ajax({
             url: URL_SERVIDOR + "inicio",
             method: "POST",
             data: JSON.stringify({"getUsuario": nombreNuevo }),
-            // "data": JSON.stringify({
-            //     id: 0,     // Cero indica creación 
-            //     nombreJugador: nombreNuevo,
-            //     numIntento: intentoNuevo,  // pte. añadir a un array de intentos
-            //     contaIntentos: contaIntentosNuevo,
-                // TODO estado -1, 0, +1 ... estado
-            // }
             
             success: function(data) {
                 $("#respuestaServidor").text("Partida creada. POST. usuario:" + data.sessionID); 
@@ -88,12 +64,10 @@ ATRIBUTOS EN EL BACKEND:
         }); 
     }) // fin bloque nueva partida
 
-    // Cancelar partida. Boton cancelar. ******************************************************************
+    // Cancelar partida. Boton cancelar.
     $("#cancelar").on("click", function(){
-        // Volver a la situación inicial de la pantalla. Ocultar elementos.
-        // Pedir al servidor el número que querìamos adivinar. 
-        $.ajax({                                                                        // núm ?
-            //url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes/2",
+
+        $.ajax({                                                                                   
             url: URL_SERVIDOR+"cancelar",
             type: 'POST',
             success: function(data) {
@@ -120,30 +94,27 @@ ATRIBUTOS EN EL BACKEND:
         $("#respuestaServidor").val("").text("");
     })
 
-    // Validación del campo #numero
     $('#numero').on('input', function() {
         var value = $(this).val();
-
-        // Si el valor es menor que 1 o mayor que 100, lo restauramos a 50 (o cualquier valor predeterminado)
+        
         if (value < 0 || value > 100) {
             $("#servidorRespuestas").text("Por favor, ingresa un número entre 1 y 100.");
-            $(this).val(50);  // Restaurar el valor predeterminado, en este caso 50
+        //    $(this).val(50);  // Restaurar el valor predeterminado, en este caso 50
         } else {
             $("#servidorRespuestas").text(""); // Limpiar el mensaje de error si el valor es válido
         }
     });
 
-    // Intentar (PUT) Jugador confirma pulsando botón intentar tras haber fijado un número
+    // Intentar. Jugador confirma pulsando botón intentar tras haber fijado un número
     $('#intentar').on('click', function() {
         var intentoNuevo = $("#numero").val();
 
-        // Solo si el número es válido (entre 1 y 100), se envía el PUT al servidor
+        // Solo si el número es válido (entre 1 y 100)
         console.log(intentoNuevo);
         if (intentoNuevo >= 1 && intentoNuevo <= 100) {
 
             intentoPayload = {numero: intentoNuevo};
-            $.ajax({                                                                        // núm ?
-                //url: "https://my-json-server.typicode.com/juanmgp888/myjsonserver/solicitudes/2",
+            $.ajax({                                                                 
                 url: URL_SERVIDOR+"adivinar/",
                 type: 'POST',
                 contentType: 'application/json',
@@ -176,11 +147,5 @@ ATRIBUTOS EN EL BACKEND:
         } else {
             $("#servidorRespuestas").text("Por favor, indica un número entre 0 y 100.");
         }
-
-        // TODO : tratamiento de respuesta del servidor:
-        // -1, el número pensado es menor que el propuesto. 
-        //  0, ¡Acertaste!
-        // +1, el número pensado es mayor que el propuesto por el jugador.
-        // Mostrar contador de intentos. Puede servir #servidorRespuestas
     });
 });

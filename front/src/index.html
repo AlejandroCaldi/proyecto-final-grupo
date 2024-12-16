@@ -16,38 +16,34 @@
     </head>
     <body>
         <div  id="zonaJuego">
-                <div class="header text-center">
-                    <h1 class="display-2">Mentalistator</h1>
-                </div>
+            <div class="header text-center">
+                <h1 class="display-2">Mentalistator</h1>
                 <h3 class="text-center">Adivina qué número estoy "pensando"</h3>
-
-                <div class="contenedor container-fluid">
-
+            </div>    
+            <div class="contenedor container-fluid">
                  <div id="nombreJugador-container">
                     <label id="nombreJugadorLabel" for="nombreJugador">¿Acaso tienes nombre, retador?</label>
                     <input type="text" id="nombreJugador" maxlength="15" placeholder="Escribe tu nombre" />
                   </div>
                   
-                 <div class="text-center">
-                 <button id="btnNuevaPartida" class="btn btn-danger btn-lg" hidden>Nueva partida</button>
-                </div>
+                  <div class="text-center">
+                    <button id="btnNuevaPartida" class="btn btn-danger btn-lg" hidden>Nueva partida</button>
+                 </div>
            
-                <div id="divIntento" class="text-center" hidden>
+                 <div id="divIntento" class="text-center" hidden>
                     <p id="mensajeIntento"></p>
                     <div id="divIntento-container">
                       <label id="numPiensas" for="numero">Introduce o selecciona un número (0-100)?</label>
                       <input type="number" id="numero" min="0" max="100" value="50" size="3" placeholder="50">
                     </div>
-                  </div>
+                 </div>
                   
 
                  <div id="btnsIntentarYCancelar" class="text-center" hidden>
                     <button id="intentar" class="btn btn-success btn-lg">Intentar</button> 
                     <button id="cancelar" class="btn btn-secondary btn-lg">Cancelar partida</button> 
-                
                  </div>
-                </div>
-            
+            <!-- </div> -->
         </div>
         
         <!-- Lista de partidas previas-->
@@ -55,9 +51,11 @@
             <ul></ul>
         </div>
         
-        <div id="respuestaServidor" class="text-bottom"></div>
+        <div id="respuestaServidor" class="text-bottom">
+            
+        </div>
         
-            <!-- Pie de página -->
+    <!-- Pie de página -->
     <div class="footer">
         <!-- <p>&copy; 2024 Mentalistator SL. Alejandro, Rodrigo & Juanma</p> -->
     </div>
