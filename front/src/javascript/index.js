@@ -116,7 +116,7 @@ $(document).ready(function() {
         if (intentoNuevo >= 1 && intentoNuevo <= 100) {
 
             $.ajax({
-                url: "http://localhost:8080/juego/adivinar",
+                url: URL_SERVIDOR+"adivinar",
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify({ "sessionID": sessionID,
