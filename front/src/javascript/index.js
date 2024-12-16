@@ -127,9 +127,9 @@ $(document).ready(function() {
                     $("#respuestaServidor").text("Enviado número seleccionado al servidor. POST");
                     let mensaje = "";
                     
-                    if (data.estado == "-1") {
+                    if (data.estado == "1") {
                         mensaje = "El número es mayor.";
-                    } else if (data.estado == "1") {
+                    } else if (data.estado == "-1") {
                         mensaje = "El número es menor.";
                     } else {
                         mensaje = "¡Acertaste!.";
