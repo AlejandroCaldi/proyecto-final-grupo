@@ -2,7 +2,7 @@ package es.santander.ascender.proyecto20;
 
 public class Guess {
     private long sessionID;
-    private int guess;
+    private int numero;
     
     public long getSessionID() {
         return sessionID;
@@ -10,11 +10,11 @@ public class Guess {
     public void setSessionID(long sessionID) {
         this.sessionID = sessionID;
     }
-    public int getGuess() {
-        return guess;
+    public int getNumero() {
+        return numero;
     }
-    public void setGuess(int guess) {
-        this.guess = guess;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
 }

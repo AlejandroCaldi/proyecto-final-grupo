@@ -75,13 +75,12 @@ public class JuegoController {
      *         se trta de -1 si el dato es menor, 0 si acertó, o 1 s el número es mayor. 
      * @throws MiExcepcion. Para el caso de que se pase un texto o un valor menor a 0 o mayor a 100. 
      */
-    @CrossOrigin(origins = "http://localhost:1234")
     @PostMapping("/adivinar")
     public ResponseEntity<Map<String, Number>> adivinaNumero(@RequestBody Guess guess) throws MiExcepcion {
 
         long sesion = guess.getSessionID();
 
-        int numero = guess.getGuess();
+        int numero = guess.getNumero();
         Juego juego = (Juego) jugadores.get(sesion);
 
         Map<String, Number> respuesta = juego.jugarIntento(numero, sesion);
