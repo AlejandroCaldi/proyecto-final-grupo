@@ -74,7 +74,7 @@ $(document).ready(function() {
         }); 
     }) // fin bloque nueva partida
 
-    // Cancelar partida. Boton cancelar.
+    // Cancelar partida. Botón cancelar.
     $("#cancelar").on("click", function(){
 
         $.ajax({                                                                                   
@@ -124,6 +124,11 @@ $(document).ready(function() {
     // Intentar. Jugador confirma pulsando botón intentar tras haber fijado un número
     $('#intentar').on('click', function() {
         let intentoNuevo = $("#numero").val();
+            // Si el campo de número está vacío o no es válido, asigna 50 como valor predeterminado
+        if (!intentoNuevo) {
+            intentoNuevo = 50;
+            $("#numero").val(50);  // Asigna el valor 50 al campo de entrada
+        }
 
         // Solo si el número es válido (entre 0 y 100)
         console.log(intentoNuevo);
@@ -147,8 +152,13 @@ $(document).ready(function() {
                             success: function(dataC) {
                                 $("#respuestaServidor").val("").text("").removeClass("acertaste perdiste aviso mayor menor error");
                                 $("#respuestaServidor").addClass("perdiste");
-                                $("#respuestaServidor").text("¡Oh Perdiste!. El número a adivinar era " + dataC.Numero);
+                                $("#respuestaServidor").text("¡Oh!. Perdiste. El número a adivinar era " + dataC.Numero);
                                 console.log(dataC);
+                                // Esperar unos segundos y reiniciar la partida
+                                setTimeout(function() {
+                                reiniciarPartida();
+                                }, 3000);  
+                                
                             },
                             error: function(dataC) {
                                 console.log("error en la cancelación");
@@ -167,6 +177,10 @@ $(document).ready(function() {
                             mensaje = "¡Acertaste!. ";
                             $("#respuestaServidor").addClass("acertaste"); 
                             data.estado = 0; 
+                            // Esperar unos segundos y reiniciar la partida
+                            setTimeout(function() {
+                            reiniciarPartida();
+                            }, 3000);  // 3 segundos de espera antes de reiniciar
                     }
                         if(INTENTOS_MAXIMOS-data.intentos==0) {
 
@@ -182,9 +196,25 @@ $(document).ready(function() {
                 }
             });
         } else {
+            $("#numero").val(50).placeholder("50");
             $("#servidorRespuestas").text("Por favor, indica un número entre 0 y 100.").addClass("aviso");
         }
+        // Función para reiniciar la partida
+        function reiniciarPartida() {
+            // Limpiar el campo de nombre y respuestas
+            $("#nombreJugador").val("").prop("disabled", false).show().focus();
+            $("#respuestaServidor").val("").text("").removeClass("acertaste perdiste aviso mayor menor error");
 
+            // Mostrar el formulario de nueva partida
+            $("#btnNuevaPartida").prop("disabled", false).show();
+            
+            // Ocultar los controles de juego
+            $("#divIntento").hide();
+            $("#btnsIntentarYCancelar").hide();
+
+            // Volver a mostrar el campo de nombre del jugador
+            $("#nombreJugador-container").show();
+        }
         // -1, el número pensado es menor que el propuesto. 
         //  0, ¡Acertaste!
         // +1, el número pensado es mayor que el propuesto por el jugador.
