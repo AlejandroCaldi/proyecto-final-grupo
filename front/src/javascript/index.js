@@ -1,8 +1,9 @@
 $(document).ready(function() {
 
-    var sesion = 0; // Variable para guardar la sesión actual
+    let sesion = 0; // Variable para guardar la sesión actual
     
     const URL_SERVIDOR = "http://localhost:8080/juego/";
+    const INTENTOS_MAXIMOS = 10;
     let sessionID = 0;
 
     $("#nombreJugador").val("");
@@ -33,7 +34,7 @@ $(document).ready(function() {
     // Crear nueva partida 
     $("#btnNuevaPartida").on("click", function() {
         $("#numero").val("");
-        var nombreNuevo = $("#nombreJugador").val();
+        let nombreNuevo = $("#nombreJugador").val();
         if (nombreNuevo === "") { // Ni vacíos ni de tipo distinto a cadena
             $("#respuestaServidor").text("Introduce un nombre si quieres retarme.");
             $("#nombreJugador").focus(); 
@@ -41,8 +42,8 @@ $(document).ready(function() {
          } else {
             $("#btnNuevaPartida").prop("disabled", true).hide(50);  
 
-            var intentoNuevo = $("#intento").val();
-            var contaIntentosNuevo = 1;
+            let intentoNuevo = $("#intento").val();
+            let contaIntentosNuevo = 1;
             $("#nombreJugador").prop("disabled", true).hide();
             $("#nombreJugador-container").hide();
 
@@ -97,7 +98,7 @@ $(document).ready(function() {
     })
 
     $('#numero').on('input', function() {
-        var value = $(this).val();
+        let value = $(this).val();
         
         if (value < 0 || value > 100) {
             $("#servidorRespuestas").text("Por favor, ingresa un número entre 1 y 100.");
@@ -109,7 +110,7 @@ $(document).ready(function() {
 
     // Intentar. Jugador confirma pulsando botón intentar tras haber fijado un número
     $('#intentar').on('click', function() {
-        var intentoNuevo = $("#numero").val();
+        let intentoNuevo = $("#numero").val();
 
         // Solo si el número es válido (entre 1 y 100)
         console.log(intentoNuevo);
@@ -123,23 +124,35 @@ $(document).ready(function() {
                                         "numero": Number(intentoNuevo)}),
                 success: function(data) {
                     $("#respuestaServidor").text("Enviado número seleccionado al servidor. POST");
+
                     let mensaje = "";
-                    
-                    if (data.estado == "1") {
-                        mensaje = "El número es mayor.";
-                    } else if (data.estado == "-1") {
-                        mensaje = "El número es menor.";
+                    if (data.INTENTOS_MAXIMOS - intentos < 0) {
+                        $.ajax({                                                                                   
+                            url: URL_SERVIDOR+"cancelar",
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({"sessionID": sessionID}),
+                            success: function(dataC) {
+                                $("#respuestaServidor").text("El número a adivinar era " + dataC.Numero);
+                                console.log(dataC);
+                            },
+                            error: function(dataC) {
+                                console.log("error en la cancelación");
+                                console.log(dataC);
+                            }
+                        });
                     } else {
-                        mensaje = "¡Acertaste!.";
-                        data.estado = "0"; 
+                        if (data.respuesta == 1) {
+                            mensaje = "El número es mayor.";
+                        } else if (data.respuesta == -1) {
+                            mensaje = "El número es menor.";
+                        } else {
+                            mensaje = "¡Acertaste!.";
+                            data.estado = 0; 
+                        }
+                        $("#respuestaServidor").text(mensaje + "Intentos restantes: " + (INTENTOS_MAXIMOS-data.intentos));
+                        console.log(data);
                     }
-                    $("#respuestaServidor").text(mensaje+ " "+ "Intentos: "+data.intentos);
-                    console.log(data);
-                },
-                success: function(data) {
-                    var mensaje = data.resultado.respuesta === 0 ? "¡Acertaste!" :
-                                  (data.resultado.respuesta === 1 ? "El número es mayor." : "El número es menor.");
-                    $("#respuestaServidor").text(mensaje);
                 },
                 error: function(data) {
                     console.log(data);
